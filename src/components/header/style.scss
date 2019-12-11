@@ -1,3 +1,5 @@
+@import "../../scss/variables/color.scss";
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -11,7 +13,7 @@
   height: 8rem;
 
   &_g {
-    stroke: white;
+    stroke: $color-gold;
   }
 }
 
@@ -31,7 +33,7 @@
   padding: 0 2rem;
 
   &_link {
-    color: white;
+    color: gainsboro;
     font-size: 1rem;
     text-decoration: none;
   }
