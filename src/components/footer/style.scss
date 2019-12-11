@@ -1,0 +1,148 @@
+@import "../../scss/variables/color.scss";
+
+.footer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  //border-top: 1px solid rgba(gainsboro, 0.2);
+  margin: 0 auto;
+  padding: 1rem 0;
+  background: black;
+}
+
+.footer_content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  padding: 0 4rem;
+  max-width: 1600px;
+}
+
+.footer_contacts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.footer_contacts_header {
+  font-size: 3rem;
+  color: gainsboro;
+}
+
+.footer_field {
+  flex-basis: 100%;
+}
+
+.footer_logo_wrapper {
+  order: 2;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.footer_logo {
+  width: 5rem;
+  height: 5rem;
+  margin: 1.5rem 4rem;
+}
+
+.footer_logo_path {
+  fill: $color-gold;
+  stroke: $color-gold;
+}
+
+.footer_label {
+  font-size: 1.5rem;
+  color: gainsboro;
+}
+
+.footer_field_content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footer_contact {
+  flex-basis: 100%;
+  //padding: 1rem 0;
+}
+
+.main_label {
+  font-size: 2rem;
+  position: relative;
+  color: $color-gold;
+}
+
+@media only screen and (min-width: 31.25em) {
+  .footer_contact {
+    flex-basis: 50%;
+  }
+}
+
+@media only screen and (min-width: 43.75em) {
+  .footer_contact {
+    flex-basis: 30%;
+  }
+}
+
+@media only screen and (min-width: 56.25em) {
+  .footer_logo {
+    margin: 0 4rem;
+  }
+
+  .footer_content {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer_contacts {
+    width: 100%;
+  }
+
+  .footer_contact {
+    flex-basis: 50%;
+  }
+
+  .footer_contacts_header {
+    text-align: left;
+    padding-bottom: 0rem;
+  }
+
+  .footer_contacts_wrapper {
+    justify-content: flex-end;
+    padding-bottom: 0;
+    padding-right: 0;
+  }
+
+  .footer_field {
+    flex-basis: 33%;
+
+    &.phone {
+      flex-basis: 100%;
+    }
+  }
+
+  .footer_field_content {
+    flex-wrap: nowrap;
+  }
+
+  .footer_logo_wrapper {
+    flex-direction: column;
+    width: auto;
+    padding: 0;
+    width: 20%;
+    align-items: center;
+    padding: 0;
+    align-self: stretch;
+    justify-content: space-between;
+  }
+
+  .footer_logo {
+    width: 6rem;
+    height: 6rem;
+    margin: 0;
+    align-self: auto;
+  }
+}
