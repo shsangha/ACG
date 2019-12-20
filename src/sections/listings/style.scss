@@ -1,0 +1,43 @@
+.listing_filters_wrapper {
+  position: relative;
+  padding: 0 2rem;
+}
+
+.listings_filters_list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  list-style: none;
+  overflow: hidden;
+}
+
+.list {
+  background: black;
+  transition: transform 0.5s ease-out;
+  transform: translateY(-100%);
+  display: flex;
+  flex-wrap: wrap;
+
+  &.entered {
+    transform: translateY(0);
+  }
+}
+
+.listings_filter_entry {
+  padding: 2rem 0;
+  font-size: 2rem;
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+
+  &.entered {
+    opacity: 1;
+  }
+}
+
+.btnopen {
+  pointer-events: none;
+}

@@ -1,0 +1,214 @@
+@import "../../../scss//variables/color.scss";
+
+.contact_form_toggles {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.contact_form_button {
+  border: none;
+  background: none;
+  font-size: 2rem;
+  padding-bottom: 2rem;
+
+  &:first-of-type {
+    margin-right: 2rem;
+  }
+}
+
+.contact_form_container {
+  position: relative;
+}
+
+.contact_form {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.contact_field {
+  width: 100%;
+  opacity: 0;
+
+  position: relative;
+  animation: fadeForm 1s forwards ease-in;
+  position: relative;
+}
+
+.contact_field_content {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: $color-gold;
+    transform-origin: 100% 0;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  &.selected {
+    .contact_label {
+      transform: translateY(-100%);
+    }
+  }
+}
+
+.contact_label {
+  font-size: 2rem;
+  position: absolute;
+  z-index: 2;
+  color: white;
+  pointer-events: none;
+  transition: transform 0.5s ease-out;
+  text-align: center;
+}
+
+.contact_dynamic_wrapper {
+  width: 200%;
+  display: flex;
+  transition: transform 0.5s ease-out;
+
+  &.mail {
+    transform: none;
+  }
+
+  &.phone {
+    transform: translateX(-50%);
+  }
+}
+
+.contact_field {
+  margin: 2rem 0;
+}
+
+.contact_input {
+  width: 100%;
+  height: 100%;
+  padding: 1rem 0.5rem;
+}
+
+.contact_input {
+  background: none;
+  border: none;
+  resize: none;
+}
+
+.contact_error_wrapper {
+  min-height: 3rem;
+}
+
+.contact_error {
+  padding: 0.5rem 0;
+  color: red;
+  font-size: 1.5rem;
+
+  &.form_error {
+    text-align: center;
+  }
+}
+
+.contact_submit_wrapper {
+  transition: all 0.3s linear;
+  align-self: center;
+  border: 1px solid $color-gold;
+  border-radius: 100px;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 3rem;
+  overflow: hidden;
+  background: none;
+  position: relative;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
+.contact_submit_text {
+  font-size: 2rem;
+  color: white;
+}
+
+.contact_submit_loader {
+  opacity: 0;
+  width: 40%;
+  height: 90%;
+  position: absolute;
+}
+
+.contact_form_confirmation_wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.contact_confirm_content {
+  height: 100%;
+  padding: 4rem 2rem;
+  transform: translateY(100%);
+  background: #050505;
+  pointer-events: all;
+}
+
+.contact_confirm_text {
+  margin-bottom: 5rem;
+  opacity: 0;
+}
+
+.contact_confirm_header {
+  font-size: 3rem;
+  padding-bottom: 1rem;
+  text-align: center;
+}
+.contact_confirm_desc {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.contact_confirm_checkmark {
+  width: 5rem;
+  margin: 0 auto;
+  display: block;
+  margin-bottom: 5rem;
+}
+
+.contact_confirm_path {
+  stroke: gainsboro;
+
+  &.circle {
+    stroke: $color-gold;
+  }
+}
+
+.contact_confirm_back_btn {
+  border: none;
+  background: none;
+  outline: none;
+  padding: 1rem 3rem;
+  border: 1px solid $color-gold;
+  border-radius: 100px;
+  display: block;
+  margin: 0 auto;
+  opacity: 0;
+}
+
+@keyframes fadeForm {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
