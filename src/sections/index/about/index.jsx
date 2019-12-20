@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { TimelineMax, TweenLite, Power1 } from "gsap"
-import DrawSVG from "./DrawSVGPlugin"
+import DrawSVG from "../../../utils/DrawSVGPlugin"
 
 import "./style.scss"
 
@@ -56,7 +56,7 @@ const About = () => {
           }
         })
       },
-      { threshold: 1 }
+      { threshold: 0.7 }
     )
 
     document.querySelectorAll(".about_animate_in").forEach(item => {
@@ -67,9 +67,11 @@ const About = () => {
   return (
     <div className="about_page">
       <div className="about_header_container space-md">
-        <div className="about_header_text about_fade about_animate_in">
-          <h1 className="about_header_main">We Are Alberta Commercial Group</h1>
-          <p className="about_desc">
+        <div className="about_header_text ">
+          <h1 className="about_header_main about_fade about_animate_in">
+            We Are Alberta Commercial Group
+          </h1>
+          <p className="about_desc about_fade about_animate_in">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam
             consequatur laborum illum, tempore asperiores recusandae itaque fuga
             numquam rerum doloremque obcaecati quae excepturi nobis eligendi
@@ -137,7 +139,9 @@ const About = () => {
       </h2>
 
       <div className="about_team_item space-md ">
-        <h3 className="about_team_item_header">Gurjant Gill</h3>
+        <h3 className="about_team_item_header about_animate_in about_header_fade">
+          Gurjant Gill
+        </h3>
         <div className="about_team_item_img_wrapper  about_animate_in about_img_fade">
           <img className="about_team_item_img " src={card} />
         </div>
@@ -161,10 +165,11 @@ const About = () => {
         </div>
       </div>
       <div className="about_team_item space-md ">
-        <h3 className="about_team_item_header ">Paul Gill</h3>
+        <h3 className="about_team_item_header about_animate_in about_header_fade ">
+          Paul Gill
+        </h3>
 
         <div className="about_team_item_img_wrapper right  about_animate_in about_img_fade">
-          {" "}
           <img className="about_team_item_img " src={card} />
         </div>
 
@@ -187,7 +192,9 @@ const About = () => {
         </div>
       </div>
       <div className="about_team_item space-md ">
-        <h3 className="about_team_item_header ">Jim Lee</h3>
+        <h3 className="about_team_item_header about_animate_in about_header_fade ">
+          Jim Lee
+        </h3>
         <div className="about_team_item_img_wrapper  about_animate_in about_img_fade">
           <img className=" about_team_item_img" src={card} />
         </div>
@@ -209,6 +216,9 @@ const About = () => {
           </a>
         </div>
       </div>
+      <h2 className="about_page_team_header about_lead about_animate_in about_header_fade">
+        Get In Touch
+      </h2>
     </div>
   )
 }
