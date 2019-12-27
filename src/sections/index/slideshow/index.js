@@ -2,12 +2,11 @@
 /* eslint-disable import/no-webpack-loader-syntax */
 import React, { useEffect, useState } from "react"
 import "./style.scss"
-import { TimelineMax, Power2, TweenLite } from "gsap"
+import { TimelineMax, Power2 } from "gsap"
 import ScrollMagic from "scrollmagic"
-import { Transition } from "react-transition-group"
 import { Link } from "gatsby"
-import "imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap"
-import "imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/debug.addindicators"
+import "animation.gsap"
+import "debug.addIndicators"
 import img from "../../../../static/img/bg.jpg"
 import { throttle } from "lodash"
 
@@ -19,39 +18,43 @@ const Slider = () => {
   const [order, setOrder] = useState([0, 1, 2, 3, 4])
 
   useEffect(() => {
-    const tl = new TimelineMax({
-      onUpdate: () => {
-        tl.progress()
-      },
-    })
-      .to(".slider_text", 0.8, { opacity: 0 })
-      .to(
-        `.img`,
-        10,
-        {
-          x: "15%",
-          scale: "-=0.2",
-          rotationX: "-2deg",
-          opacity: 0,
-          ease: Power2.easeOut,
+    if (typeof window !== undefined) {
+      const tl = new TimelineMax({
+        onUpdate: () => {
+          tl.progress()
         },
-        "-=0.8"
-      )
+      })
+        .to([".slider_text", ".prev_slide_btn", ".next_slide_btn"], 0.8, {
+          opacity: 0,
+        })
+        .to(
+          `.img`,
+          10,
+          {
+            x: "15%",
+            scale: "-=0.2",
+            rotationX: "-2deg",
+            opacity: 0,
+            ease: Power2.easeOut,
+          },
+          "-=0.8"
+        )
 
-    const controller = new ScrollMagic.Controller({
-      container: ".container",
-    })
+      const controller = new ScrollMagic.Controller({
+        container: ".container",
+      })
 
-    new ScrollMagic.Scene({
-      triggerElement: ".header",
-      triggerHook: "onLeave",
-      offset: 30,
-      duration: "60%",
-    })
-      .setClassToggle(`.paralax_content`, `scrolling`)
-      .setTween(tl)
-      // .addIndicators()
-      .addTo(controller)
+      new ScrollMagic.Scene({
+        triggerElement: ".header",
+        triggerHook: "onLeave",
+        offset: 30,
+        duration: "100%",
+      })
+        .setClassToggle(`.paralax_content`, `scrolling`)
+        .setTween(tl)
+        //  .addIndicators()
+        .addTo(controller)
+    }
   }, [])
 
   useEffect(() => {
@@ -110,6 +113,39 @@ const Slider = () => {
           )
         })}
       </div>
+      <button onClick={prevSlide} className="prev_slide_btn">
+        <svg
+          className="slide_btn_svg"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 30.22 30.28"
+        >
+          <polyline
+            className="arrow_path left"
+            points="0.07 0.14 30.07 14.74 30.07 15.54 0.07 30.14"
+            fill="none"
+            stroke="#231f20"
+            strokeMiterlimit="10"
+            strokeWidth="1"
+          />
+        </svg>
+      </button>
+      <button onClick={nextSlide} className="next_slide_btn">
+        <svg
+          className="slide_btn_svg"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 30.22 30.28"
+        >
+          <polyline
+            className="arrow_path right"
+            points="0.07 0.14 30.07 14.74 30.07 15.54 0.07 30.14"
+            fill="none"
+            stroke="#231f20"
+            strokeMiterlimit="10"
+            strokeWidth="1"
+          />
+        </svg>
+      </button>
+
       <div className="slider_text">
         <Link className="more slider_link" key={order[2]} to="">
           More
