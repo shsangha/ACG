@@ -7,7 +7,6 @@ import ScrollMagic from "scrollmagic"
 import { Link } from "gatsby"
 import "animation.gsap"
 import "debug.addIndicators"
-import img from "../../../../static/img/bg.jpg"
 import { throttle } from "lodash"
 
 import Slide from "./slide"
