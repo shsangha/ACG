@@ -1,7 +1,10 @@
 import React, { useRef, useState, useEffect } from "react"
-import { TimelineLite, Power1 } from "gsap"
+import TimelineLite from "TimelineLite"
+import { Power1 } from "gsap"
 import { Transition } from "react-transition-group"
 import { useFormik } from "formik"
+
+let loaderTimeline
 
 const Form = props => {
   const firstRef = useRef(null)
@@ -36,6 +39,19 @@ const Form = props => {
   }
 
   useEffect(() => {
+    loaderTimeline = new TimelineLite({ paused: true })
+      .to(".contact_submit_text", 0.5, { opacity: 0 })
+      .to(".contact_submit_loader", 0.5, { opacity: 1 }, "-=0.3")
+      .staggerTo(
+        ".loader_circ",
+        0.5,
+        { y: -40, repeat: -1, yoyo: true, ease: Power1.easeOut },
+        0.2,
+        "-=0.4"
+      )
+  }, [])
+
+  useEffect(() => {
     firstRef.current.focus()
 
     if (props.tabTrab) {
@@ -67,17 +83,6 @@ const Form = props => {
 
     return errors
   }
-
-  const loaderTimeline = new TimelineLite({ paused: true })
-    .to(".contact_submit_text", 0.5, { opacity: 0 })
-    .to(".contact_submit_loader", 0.5, { opacity: 1 }, "-=0.3")
-    .staggerTo(
-      ".loader_circ",
-      0.5,
-      { y: -40, repeat: -1, yoyo: true, ease: Power1.easeOut },
-      0.2,
-      "-=0.4"
-    )
 
   const submitFn = values => {
     const url = "/.netlify/functions/sendMail"
