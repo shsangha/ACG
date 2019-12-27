@@ -4,12 +4,12 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  height: 18rem;
+  height: 12rem;
   margin-bottom: 2rem;
 }
 
 .header_logo {
-  width: 12rem;
+  width: 6rem;
 
   &_g {
     stroke: $color-gold;
@@ -57,7 +57,7 @@
 @media only screen and (min-width: 43.75em) {
   .header {
     flex-wrap: nowrap;
-    padding: 2rem 12rem;
+    padding: 2rem 4rem;
   }
 
   .header_nav {
