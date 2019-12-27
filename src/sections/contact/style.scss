@@ -46,10 +46,11 @@
   }
 }
 
-@media only screen and (min-width: 75em) {
+@media only screen and (min-width: 60em) {
   .contact_page_wrapper {
     flex-direction: row;
     justify-content: space-between;
+    margin-top: 0;
   }
 
   .contact_form_wrapper {
