@@ -13,7 +13,7 @@ const About = () => {
     })
 
     const options = {
-      threshold: 1.0,
+      threshold: 0.8,
     }
 
     const observer = new IntersectionObserver(element => {
@@ -56,7 +56,7 @@ const About = () => {
           }
         })
       },
-      { threshold: 0.7 }
+      { threshold: 0.8 }
     )
 
     document.querySelectorAll(".about_animate_in").forEach(item => {
