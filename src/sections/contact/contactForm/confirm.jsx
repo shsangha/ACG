@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import { Transition } from "react-transition-group"
-import { TimelineLite, Power1 } from "gsap"
+import TimelineLite from "TimelineLite"
+import { Power1 } from "gsap"
 import DrawSVG from "../../../utils/DrawSVGPlugin"
 const pluigns = [DrawSVG] // just to avoid plugin being treeshaken
 
