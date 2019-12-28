@@ -11,9 +11,7 @@ Size: '1,200 - 1,500 SF'
 Price: '1215'
 Images:
   - /img/a692bf5c-d632-4c32-853d-eb0a453eccda-w.jpg
-  - /img/75cd7a60-d85a-42d3-bad2-be22618ff23c-w.jpg
   - /img/c0b1b112-0c2a-4e1b-9b93-15b60eb02ece-w.jpg
-  - /img/75cd7a60-d85a-42d3-bad2-be22618ff23c-w.jpg
   - /img/75cd7a60-d85a-42d3-bad2-be22618ff23c-w.jpg
 Description: >-
   The Chopped Leaf introduced its healthy fast food concept of chef designed
