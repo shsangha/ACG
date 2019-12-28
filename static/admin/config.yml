@@ -16,9 +16,19 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Type", name: "Type", widget: "hidden", default: "team" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Name", name: "title", widget: "string" }
-      - { label: "Description", name: "Description", widget: "markdown" }
+      - {
+          label: "Publish Date",
+          name: "date",
+          widget: "datetime",
+          required: false,
+        }
+      - { label: "Name", name: "title", widget: "string", required: true }
+      - {
+          label: "Description",
+          name: "Description",
+          widget: "markdown",
+          required: true,
+        }
       - { label: "Image", name: "Image", widget: "image", required: true }
       - { label: "Email", name: "Email", widget: "string", required: true }
       - { label: "Phone", name: "Phone", widget: "string", required: true }
@@ -33,9 +43,19 @@ collections:
       preview: false
     fields:
       - { label: "Type", name: "Type", widget: "hidden", default: "about" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Header", name: "title", widget: "string" }
-      - { label: "Description", name: "Description", widget: "markdown" }
+      - {
+          label: "Publish Date",
+          name: "date",
+          widget: "datetime",
+          required: false,
+        }
+      - { label: "Header", name: "title", widget: "string", required: true }
+      - {
+          label: "Description",
+          name: "Description",
+          widget: "markdown",
+          required: true,
+        }
 
   - name: "listing"
     label: "listing"
@@ -47,41 +67,63 @@ collections:
       preview: false
     fields:
       - { label: "Type", name: "Type", widget: "hidden", default: "listing" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Title", name: "title", widget: "string" }
+      - {
+          label: "Publish Date",
+          name: "date",
+          widget: "datetime",
+          required: false,
+        }
+      - { label: "Title", name: "title", widget: "string", required: true }
       - label: "Property Type"
         name: "PropertyType"
         widget: "select"
         options: ["commercial", "retail", "office", "industrial", "hotel"]
+        required: true
 
       - label: "Listing Type"
         name: "ListingType"
         widget: "select"
         options: ["sale", "lease"]
-      - { label: "Brochure", name: "Brochure", widget: "file" }
-      - { label: "Location", name: "Loacation", widget: "string" }
-      - { label: "Maps Src", name: "Map", widget: "string" }
-      - { label: "Size", name: "Size", widget: "string" }
-      - { label: "Price", name: "Price", widget: "string" }
+        required: true
+      - { label: "Brochure", name: "Brochure", widget: "file", required: false }
+      - {
+          label: "Location",
+          name: "Loacation",
+          widget: "string",
+          required: false,
+        }
+      - { label: "Maps Src", name: "Map", widget: "string", required: false }
+      - { label: "Size", name: "Size", widget: "string", required: false }
+      - { label: "Price", name: "Price", widget: "string", required: false }
       - label: "Images"
         name: "Images"
         widget: "list"
+        required: false
         field: { label: Image, name: Image, widget: image }
-      - { label: "Description", name: "Description", widget: "markdown" }
+      - { label: "Header", name: "Header", widget: "string", required: true }
+      - {
+          label: "Description",
+          name: "Description",
+          widget: "markdown",
+          required: true,
+        }
       - label: Highlights
         name: Highlights
         widget: "list"
+        required: false
         fields:
           - { label: Description, name: Description, widget: string }
       - label: Specs
         name: Specs
         widget: "list"
+        required: false
         fields:
           - { label: Key, name: Key, widget: string }
           - { label: Value, name: Value, widget: string }
       - label: Areas
         name: Areas
         widget: "list"
+        required: false
         fields:
           - { label: Area, name: Area, widget: string }
           - { label: Size, name: Size, widget: string }
