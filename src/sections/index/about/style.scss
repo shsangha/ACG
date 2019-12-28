@@ -20,15 +20,6 @@
   transform: translateX(2rem);
   transition: all 1s ease-in;
 
-  &.right {
-    transform: translateX(-2rem);
-
-    &.intersected {
-      opacity: 1;
-      transform: none;
-    }
-  }
-
   &.intersected {
     opacity: 1;
     transform: none;
@@ -48,11 +39,6 @@
   &:after {
     transition: all 1s ease-out;
     transform-origin: 100% 0;
-  }
-
-  &.right:after {
-    transition: all 1s ease-out;
-    transform-origin: 0 0;
   }
 
   &.intersected {
@@ -117,6 +103,21 @@
   width: 100%;
   flex-wrap: wrap;
   justify-content: space-between;
+
+  &:nth-child(even) {
+    .about_side_fade {
+      transform: translateX(-2rem);
+
+      &.intersected {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    .about_img_fade:after {
+      transition: all 1s ease-out;
+      transform-origin: 0 0;
+    }
+  }
 }
 
 .about_team_item_header {
