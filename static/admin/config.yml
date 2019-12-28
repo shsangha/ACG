@@ -11,14 +11,13 @@ collections:
   - name: "team"
     label: "team"
     folder: "src/content/team"
-    create: true
-    delete: true
+    create: false
+    delete: false
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    editor:
-      preview: false
     fields:
       - { label: "Type", name: "Type", widget: "hidden", default: "team" }
-      - { label: "Name", name: "Name", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Name", name: "title", widget: "string" }
       - { label: "Description", name: "Description", widget: "markdown" }
       - { label: "Image", name: "Image", widget: "image", required: true }
       - { label: "Email", name: "Email", widget: "string", required: true }
@@ -27,14 +26,15 @@ collections:
   - name: "about"
     label: "about"
     folder: "src/content/about"
-    create: true
-    delete: true
+    create: false
+    delete: false
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     editor:
       preview: false
     fields:
       - { label: "Type", name: "Type", widget: "hidden", default: "about" }
-      - { label: "Header", name: "Header", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Header", name: "title", widget: "string" }
       - { label: "Description", name: "Description", widget: "markdown" }
 
   - name: "listing"
@@ -47,7 +47,8 @@ collections:
       preview: false
     fields:
       - { label: "Type", name: "Type", widget: "hidden", default: "listing" }
-      - { label: "Title", name: "Title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Title", name: "title", widget: "string" }
       - label: "Property Type"
         name: "PropertyType"
         widget: "select"
@@ -58,7 +59,7 @@ collections:
         widget: "select"
         options: ["sale", "lease"]
       - { label: "Brochure", name: "Brochure", widget: "file" }
-      - { label: "Maps Api String", name: "Loacation", widget: "string" }
+      - { label: "Location", name: "Loacation", widget: "string" }
       - { label: "Size", name: "Size", widget: "string" }
       - { label: "Price", name: "Price", widget: "string" }
       - label: "Images"
