@@ -60,6 +60,7 @@ collections:
         options: ["sale", "lease"]
       - { label: "Brochure", name: "Brochure", widget: "file" }
       - { label: "Location", name: "Loacation", widget: "string" }
+      - { label: "Maps Src", name: "Map", widget: "string" }
       - { label: "Size", name: "Size", widget: "string" }
       - { label: "Price", name: "Price", widget: "string" }
       - label: "Images"
