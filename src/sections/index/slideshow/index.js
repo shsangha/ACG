@@ -1,20 +1,46 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-webpack-loader-syntax */
 import React, { useEffect, useState } from "react"
+import { StaticQuery, graphql, Link } from "gatsby"
+import Img from "gatsby-image"
 import "./style.scss"
 import { TimelineMax, Power2 } from "gsap"
 import ScrollMagic from "scrollmagic"
-import { Link } from "gatsby"
 import "animation.gsap"
 import "debug.addIndicators"
 import { throttle } from "lodash"
 
 import Slide from "./slide"
 
-import house from "../../../../static/img/house.jpg"
+const Slider = props => {
+  const [order, setOrder] = useState(
+    (() => {
+      const filteredProps = props.allMarkdownRemark.nodes.filter(
+        node => node.frontmatter.Images !== null
+      )
 
-const Slider = () => {
-  const [order, setOrder] = useState([0, 1, 2, 3, 4])
+      if (filteredProps.length < 5) {
+        const appendedProps = filteredProps
+
+        for (let i = 0; i <= 5 - filteredProps.length; i++) {
+          appendedProps.push(
+            {
+              ...filteredProps[i],
+              id: `${filteredProps[i].id}${i}infiniteWrapper`,
+              wrapping: filteredProps[i].id,
+            } || {
+              ...filteredProps[0],
+              id: `${filteredProps[0].id}${i}infiniteWrapper`,
+              wrapping: filteredProps[0].id,
+            }
+          )
+        }
+        return appendedProps
+      }
+
+      return filteredProps
+    })()
+  )
 
   useEffect(() => {
     if (typeof window !== undefined) {
@@ -89,22 +115,53 @@ const Slider = () => {
   return (
     <div className="slider_wrapper">
       <div id="slider" className="slider">
-        {order.map((current, idx) => {
+        {[0, 1, 2, 3, 4].map((_, idx) => {
           return (
             <Slide
               nextSlide={nextSlide}
               prevSlide={prevSlide}
               index={idx}
-              current={current}
-              key={current}
+              key={order[idx].id}
             >
-              <div className="slide">
+              <div
+                to={`listings/${
+                  order[idx].wrapping ? order[idx].wrapping : order[idx].id
+                }`}
+                className="slide"
+              >
                 <div className="paralax_content">
                   <div className="img">
-                    <img
-                      src={house}
-                      className={`img_content ${idx === 2 ? "selected" : ""}`}
-                    />
+                    {(() => {
+                      const SliderImg = () => (
+                        <Img
+                          style={{
+                            width: "100%",
+                            position: "relative",
+                          }}
+                          fluid={
+                            order[idx].frontmatter.Images[0].childImageSharp
+                              .fluid
+                          }
+                          className={`img_content ${
+                            idx === 2 ? "selected" : ""
+                          }`}
+                        />
+                      )
+
+                      return idx === 2 ? (
+                        <Link
+                          to={`/listings/${
+                            order[idx].wrapping
+                              ? order[idx].wrapping
+                              : order[idx].id
+                          }`}
+                        >
+                          <SliderImg />
+                        </Link>
+                      ) : (
+                        <SliderImg />
+                      )
+                    })()}
                   </div>
                 </div>
               </div>
@@ -146,8 +203,14 @@ const Slider = () => {
       </button>
 
       <div className="slider_text">
-        <Link className="more slider_link" key={order[2]} to="">
-          More
+        <Link
+          className="more slider_link"
+          key={order[2]}
+          to={`/listings/${
+            order[2].wrapping ? order[2].wrapping : order[2].id
+          }`}
+        >
+          {order[2].frontmatter.title}
         </Link>
 
         <Link className="slider_link" to="/listings">
@@ -159,4 +222,55 @@ const Slider = () => {
   )
 }
 
-export default Slider
+// eslint-disable-next-line react/display-name
+export default props => (
+  <StaticQuery
+    query={graphql`
+      query {
+        allMarkdownRemark(
+          filter: { frontmatter: { Type: { eq: "listing" } } }
+          sort: { fields: [frontmatter___date], order: DESC }
+        ) {
+          nodes {
+            id
+            frontmatter {
+              date
+              title
+              PropertyType
+              ListingType
+              Brochure {
+                relativePath
+              }
+              Loacation
+              Map
+              Size
+              Price
+              Header
+              Description
+              Highlights {
+                Description
+              }
+              Specs {
+                Key
+                Value
+              }
+              Areas {
+                Area
+                Size
+              }
+              Images {
+                childImageSharp {
+                  fluid(maxWidth: 1000) {
+                    ...GatsbyImageSharpFluid
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    `}
+  >
+    {data => <Slider {...props} {...data} />}
+  </StaticQuery>
+)
