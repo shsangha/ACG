@@ -57,3 +57,65 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
     },
   })
 }
+
+exports.createPages = ({ actions: { createPage }, graphql }) => {
+  return graphql(`
+    query Pages {
+      listings: allMarkdownRemark(
+        filter: { frontmatter: { Type: { eq: "listing" } } }
+        sort: { fields: [frontmatter___date], order: DESC }
+      ) {
+        edges {
+          node {
+            id
+            frontmatter {
+              title
+              Description
+              PropertyType
+              ListingType
+              Price
+              Loacation
+              Map
+              Size
+              Header
+              Brochure {
+                relativePath
+              }
+              Images {
+                childImageSharp {
+                  fluid(maxWidth: 700) {
+                    aspectRatio
+                  }
+                }
+              }
+              Specs {
+                Key
+                Value
+              }
+              Areas {
+                Area
+                Size
+              }
+              Highlights {
+                Description
+              }
+            }
+          }
+        }
+      }
+    }
+  `).then(result => {
+    const listings = result.data.listings.edges
+
+    // eslint-disable-next-line array-callback-return
+    Array.from({ length: listings.length }).map((_, index) => {
+      createPage({
+        path: `/listings/${listings[index].node.id}`,
+        component: Path.resolve("./src/templates/listings/index.jsx"),
+        context: {
+          ...listings[index].node,
+        },
+      })
+    })
+  })
+}
