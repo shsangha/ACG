@@ -1,16 +1,18 @@
 import React, { useState, useEffect, useRef } from "react"
 import "./style.scss"
-import { Link } from "gatsby"
+import { Link, StaticQuery, graphql } from "gatsby"
+import Img from "gatsby-image"
 import { TimelineLite } from "gsap"
 import { throttle } from "lodash"
 import { Transition } from "react-transition-group"
 
-const Listings = () => {
+const Listings = props => {
   const [filtersOpen, setFiltersOpen] = useState(false)
   const [filterValues, setFilterValues] = useState({
     property: "all",
     listing: "all",
     sortDesc: true,
+    values: props.allMarkdownRemark.nodes,
   })
 
   const filtersRef = useRef(null)
@@ -28,6 +30,8 @@ const Listings = () => {
   }, 300)
 
   useEffect(() => {
+    console.log(props)
+
     handleResize()
 
     window.addEventListener("resize", handleResize)
@@ -137,7 +141,6 @@ const Listings = () => {
                       <option className="listing_option" value="hotel">
                         Hotel/Motel
                       </option>
-                      {/*make these dynamic based on whats in the cms*/}
                     </select>
                   </li>
                 </ul>
@@ -177,25 +180,79 @@ const Listings = () => {
       </Transition>
 
       <section className="listings_cards_wrapper">
-        {[1, 2, 3, 4, 5, 5, 6, 6, 6, 6, 6].map(() => (
-          <Link className="listings_card" to="/listings/fake">
-            <h3 className="listings_card_listing_type">Type</h3>
-            <img
-              className="listing_card_img"
-              src="https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-            />
-            <div className="listings_card_content">
-              <h2 className="listings_card_title">Title</h2>
-              <span className="listings_card_address">location</span>
-              <p className="listings_card_desc">desc</p>
-              <span className="listings_card_price">price</span>
-              <span className="listing_card_property_type">Category</span>
-            </div>
-          </Link>
-        ))}
+        {filterValues.values.map(
+          ({
+            id,
+            frontmatter: {
+              title,
+              Description,
+              Loacation,
+              Images,
+              PropertyType,
+              ListingType,
+            },
+          }) => {
+            return (
+              <Link key={id} className="listings_card" to="/listings/fake">
+                <h3 className="listings_card_listing_type">
+                  For {ListingType}
+                </h3>
+                <Img
+                  className="listing_card_img"
+                  fluid={Images[0] ? Images[0].childImageSharp.fluid : null}
+                />
+                <div className="listings_card_content">
+                  <h2 className="listings_card_title">{title}</h2>
+                  {Loacation && (
+                    <span className="listings_card_address">{Loacation}</span>
+                  )}
+                  {Description && (
+                    <p className="listings_card_desc">{Description}</p>
+                  )}
+                  <span className="listing_card_property_type">
+                    {PropertyType}
+                  </span>
+                </div>
+              </Link>
+            )
+          }
+        )}
       </section>
     </div>
   )
 }
+/* eslint-disable react/display-name */
 
-export default Listings
+export default props => (
+  <StaticQuery
+    query={graphql`
+      {
+        allMarkdownRemark(
+          filter: { frontmatter: { Type: { eq: "listing" } } }
+          sort: { fields: [frontmatter___date], order: DESC }
+        ) {
+          nodes {
+            id
+            frontmatter {
+              date
+              title
+              PropertyType
+              ListingType
+              Loacation
+              Description
+              Images {
+                childImageSharp {
+                  fluid(maxWidth: 400) {
+                    ...GatsbyImageSharpFluid
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    `}
+  >
+    {data => <Listings {...props} {...data} />}
+  </StaticQuery>
+)
