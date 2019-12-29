@@ -16,22 +16,62 @@ const Listing = props => {
         <div className="listing_page_listing">
           <div className="listing_hero_element">
             <h3 className="listing_page_type">For Lease</h3>
-            <Carousel className="listing_page_slider">
-              {frontmatter.Images.map(image => (
-                <div
-                  key={image.childImageSharp.fluid.src}
-                  style={{ background: "blue", width: "100%" }}
-                >
-                  <Img
-                    style={{}}
-                    className="listing_page_slide"
-                    fluid={image.childImageSharp.fluid}
-                    objectFit="contain"
-                    objectPosition="50% 50%"
-                  />
-                </div>
-              ))}
-            </Carousel>
+
+            <div className="listing_carousel_wrapper">
+              <Carousel
+                centered
+                arrowLeft={
+                  <svg
+                    className="listing_page_arrow"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 30.22 30.28"
+                  >
+                    <polyline
+                      className="arrow_path left"
+                      points="0.07 0.14 30.07 14.74 30.07 15.54 0.07 30.14"
+                      fill="none"
+                      stroke="#231f20"
+                      strokeMiterlimit="10"
+                      strokeWidth="1"
+                    />
+                  </svg>
+                }
+                arrowRight={
+                  <svg
+                    className="listing_page_arrow"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 30.22 30.28"
+                  >
+                    <polyline
+                      className="arrow_path "
+                      points="0.07 0.14 30.07 14.74 30.07 15.54 0.07 30.14"
+                      fill="none"
+                      stroke="#231f20"
+                      strokeMiterlimit="10"
+                      strokeWidth="1"
+                    />
+                  </svg>
+                }
+                addArrowClickHandler
+                draggable={false}
+                className="listing_page_slider"
+              >
+                {frontmatter.Images.map(image => (
+                  <div
+                    key={image.childImageSharp.fluid.src}
+                    style={{ width: "95%" }}
+                  >
+                    <Img
+                      style={{}}
+                      className="listing_page_slide"
+                      fluid={image.childImageSharp.fluid}
+                      objectFit="contain"
+                      objectPosition="50% 50%"
+                    />
+                  </div>
+                ))}
+              </Carousel>
+            </div>
           </div>
         </div>
       </div>
