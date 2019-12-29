@@ -76,6 +76,7 @@ class Slide extends Component {
         onClick: this.handleClick,
         onKeyDown: this.handleKeyDown,
         tabIndex: 0,
+        // eslint-disable-next-line no-useless-computed-key
         ["aria-label"]: "use arrows to navigate slides",
       })
     )
