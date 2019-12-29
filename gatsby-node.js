@@ -81,13 +81,7 @@ exports.createPages = ({ actions: { createPage }, graphql }) => {
               Brochure {
                 relativePath
               }
-              Images {
-                childImageSharp {
-                  fluid(maxWidth: 700) {
-                    aspectRatio
-                  }
-                }
-              }
+
               Specs {
                 Key
                 Value
@@ -113,7 +107,7 @@ exports.createPages = ({ actions: { createPage }, graphql }) => {
         path: `/listings/${listings[index].node.id}`,
         component: Path.resolve("./src/templates/listings/index.jsx"),
         context: {
-          ...listings[index].node,
+          id: listings[index].node.id,
         },
       })
     })
