@@ -79,8 +79,48 @@ const About = () => {
             }
           }
 
-          team: allMarkdownRemark(
-            filter: { frontmatter: { Type: { eq: "team" } } }
+          paul: allMarkdownRemark(
+            filter: { frontmatter: { title: { eq: "Paul Gill" } } }
+          ) {
+            nodes {
+              frontmatter {
+                title
+                Description
+                Image {
+                  childImageSharp {
+                    fluid(maxWidth: 600) {
+                      ...GatsbyImageSharpFluid
+                    }
+                  }
+                }
+                Email
+                Phone
+              }
+            }
+          }
+
+          jim: allMarkdownRemark(
+            filter: { frontmatter: { title: { eq: "Jim Lee" } } }
+          ) {
+            nodes {
+              frontmatter {
+                title
+                Description
+                Image {
+                  childImageSharp {
+                    fluid(maxWidth: 600) {
+                      ...GatsbyImageSharpFluid
+                    }
+                  }
+                }
+                Email
+                Phone
+              }
+            }
+          }
+
+          gurjant: allMarkdownRemark(
+            filter: { frontmatter: { title: { eq: "Gurjant Gill" } } }
           ) {
             nodes {
               frontmatter {
@@ -104,7 +144,9 @@ const About = () => {
       {data => {
         const { title, Description } = data.about.nodes[0].frontmatter
 
-        const team = data.team.nodes.reverse()
+        const { paul, jim, gurjant } = data
+
+        const team = [gurjant.nodes[0], paul.nodes[0], jim.nodes[0]]
 
         return (
           <div className="about_page">
