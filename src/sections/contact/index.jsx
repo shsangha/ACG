@@ -10,7 +10,7 @@ const Contact = () => {
         <div className="contact_form_wrapper">
           <div className="contact_page_form">
             <h1 className="contact_page_header">Get In Contact</h1>
-            <ContactForm />
+            <ContactForm tabTrab={false} subject="contact form" />
           </div>
         </div>
         <img
