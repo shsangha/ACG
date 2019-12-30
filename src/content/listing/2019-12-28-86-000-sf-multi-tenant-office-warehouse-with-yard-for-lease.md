@@ -2,6 +2,7 @@
 Type: listing
 date: 2019-12-28T20:46:27.044Z
 title: '86,000 SF Multi Tenant Office/Warehouse with Yard For Lease'
+Agent: Gurjant Gill
 PropertyType: industrial
 ListingType: lease
 Loacation: '1130-34 Avenue, Nisku, Alberta, Canada'
