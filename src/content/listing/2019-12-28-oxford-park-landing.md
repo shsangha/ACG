@@ -2,6 +2,7 @@
 Type: listing
 date: 2019-12-28T20:28:02.712Z
 title: Oxford Park Landing
+Agent: Paul Gill
 PropertyType: office
 ListingType: lease
 Brochure: /img/75cd7a60-d85a-42d3-bad2-be22618ff23c-w.jpg
