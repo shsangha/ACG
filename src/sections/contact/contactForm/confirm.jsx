@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useRef } from "react"
 import { Transition } from "react-transition-group"
 import TimelineLite from "TimelineLite"
 import { Power1 } from "gsap"
@@ -16,19 +16,21 @@ const ConfirmationCardTransitionHelper = props => {
   }
 
   useEffect(() => {
-    if (props.tabTrap) {
-      window.addEventListener("keydown", focusTrap)
+    window.addEventListener("keydown", focusTrap)
 
-      return () => window.removeEventListener("keydown", focusTrap)
-    }
-  }, [props.tabTrap])
+    return () => window.removeEventListener("keydown", focusTrap)
+  }, [])
 
   return props.children
 }
 
 const ConfirmationCard = props => {
   const resetForm = () => {
-    props.setConfirmed(false)
+    if (props.callback) {
+      props.callback()
+    } else {
+      props.setConfirmed(false)
+    }
   }
 
   return (
@@ -134,7 +136,11 @@ const ConfirmationCard = props => {
                   strokeWidth="1.68"
                 />
               </svg>
-              <button onClick={resetForm} className="contact_confirm_back_btn">
+              <button
+                focus
+                onClick={resetForm}
+                className="contact_confirm_back_btn"
+              >
                 Go back
               </button>
             </div>
@@ -143,10 +149,6 @@ const ConfirmationCard = props => {
       </Transition>
     </div>
   )
-}
-
-ConfirmationCard.defaultProps = {
-  tabTrap: true,
 }
 
 export default ConfirmationCard
