@@ -2,6 +2,7 @@
 Type: listing
 date: 2019-12-28T20:43:37.795Z
 title: The Chopped Leaf - Seeking Street Front Locations Across Canada
+Agent: Jim Lee
 PropertyType: retail
 ListingType: lease
 Loacation: 'Western Canada, Kelowna, British Columbia, Canada'
