@@ -229,6 +229,10 @@
 }
 
 @media only screen and (min-width: 43.75em) {
+  .list {
+    transform: none;
+  }
+
   .listings_page {
     height: auto;
     padding-top: 0;
@@ -240,6 +244,9 @@
 
   .listings_menuBar {
     margin: 0 auto;
+    border: 1px solid rgba(white, 0.1);
+    border-left: none;
+    border-right: none;
   }
 
   .listings_filters {
