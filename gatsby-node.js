@@ -69,30 +69,7 @@ exports.createPages = ({ actions: { createPage }, graphql }) => {
           node {
             id
             frontmatter {
-              title
-              Description
-              PropertyType
-              ListingType
-              Price
-              Loacation
-              Map
-              Size
-              Header
-              Brochure {
-                relativePath
-              }
-
-              Specs {
-                Key
-                Value
-              }
-              Areas {
-                Area
-                Size
-              }
-              Highlights {
-                Description
-              }
+              Agent
             }
           }
         }
@@ -108,6 +85,7 @@ exports.createPages = ({ actions: { createPage }, graphql }) => {
         component: Path.resolve("./src/templates/listings/index.jsx"),
         context: {
           id: listings[index].node.id,
+          target: listings[index].node.frontmatter.Agent,
         },
       })
     })
