@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react"
 import "./style.scss"
 import { Link, StaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
-import { TimelineLite } from "gsap"
 import { throttle } from "lodash"
 import { Transition } from "react-transition-group"
 
@@ -12,14 +11,43 @@ const Listings = props => {
     property: "all",
     listing: "all",
     sortDesc: true,
-    values: props.allMarkdownRemark.nodes,
   })
+
+  const [values, setValues] = useState(props.allMarkdownRemark.nodes)
 
   const filtersRef = useRef(null)
 
   const toggleFilters = () => {
     setFiltersOpen(prev => !prev)
   }
+
+  useEffect(() => {
+    const list = props.allMarkdownRemark.nodes
+      .filter(({ frontmatter }) => {
+        if (filterValues.property === "all") {
+          return true
+        }
+
+        return frontmatter.PropertyType === filterValues.property
+      })
+      .filter(({ frontmatter }) => {
+        if (filterValues.listing === "all") {
+          return true
+        }
+
+        return frontmatter.ListingType === filterValues.listing
+      })
+
+    if (!filterValues.sortDesc) {
+      list.reverse()
+    }
+    setValues(list)
+  }, [
+    filterValues.property,
+    filterValues.listing,
+    filterValues.sortDesc,
+    props.allMarkdownRemark.nodes,
+  ])
 
   const handleResize = throttle(() => {
     if (window.innerWidth > 700) {
@@ -30,8 +58,6 @@ const Listings = props => {
   }, 300)
 
   useEffect(() => {
-    console.log(props)
-
     handleResize()
 
     window.addEventListener("resize", handleResize)
@@ -42,10 +68,12 @@ const Listings = props => {
   const handleSelectChange = event => {
     const { name, value } = event.target
 
-    setFilterValues(prev => ({
-      ...prev,
-      [name]: value,
-    }))
+    setFilterValues(prev => {
+      return {
+        ...prev,
+        [name]: value,
+      }
+    })
   }
 
   const toggleSortOrder = () => {
@@ -68,7 +96,6 @@ const Listings = props => {
                 filtersOpen ? "filters_open" : ""
               }`}
             >
-              {" "}
               &#x2B;
             </span>
           </button>
@@ -79,11 +106,13 @@ const Listings = props => {
                 exit: 500,
               }}
               in={filtersOpen}
-              unmountOnExit
-              mountOnEnter
             >
               {state => (
-                <ul className={`list ${state}`}>
+                <ul
+                  className={`list ${state}  ${
+                    filtersOpen ? "filters_open" : ""
+                  }`}
+                >
                   <li className={`listings_filter_entry ${state}`}>
                     <label
                       className="listings_filters_label"
@@ -180,7 +209,7 @@ const Listings = props => {
       </Transition>
 
       <section className="listings_cards_wrapper">
-        {filterValues.values.map(
+        {values.map(
           ({
             id,
             frontmatter: {
