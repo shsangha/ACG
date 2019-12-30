@@ -74,6 +74,13 @@ collections:
           required: false,
         }
       - { label: "Title", name: "title", widget: "string", required: true }
+
+      - label: "Agent"
+        name: "Agent"
+        widget: "select"
+        options: ["Gurjant Gill", "Paul Gill", "Jim Lee"]
+        required: true
+
       - label: "Property Type"
         name: "PropertyType"
         widget: "select"
