@@ -31,7 +31,7 @@
     "lodash": "^4.17.15",
     "mailgun-js": "^0.22.0",
     "netlify-lambda": "^1.6.3",
-    "paper": "^0.12.3",
+    "paper": "^0.12.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
@@ -93,12 +93,5 @@
   "bugs": {
     "url": "https://github.com/shsangha/Portfolio/issues"
   },
-  "homepage": "https://github.com/shsangha/Portfolio#readme",
-  "browserslist": [
-    "defaults",
-    "ie 8",
-    "ie 9",
-    "ie 10",
-    "ie 11"
-  ]
+  "homepage": "https://github.com/shsangha/Portfolio#readme"
 }
