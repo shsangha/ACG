@@ -1,12 +1,6 @@
 import React from "react"
-import Header from "../components/header"
 import Contact from "../sections/contact"
 
-const ContactPage = () => (
-  <>
-    <Header />
-    <Contact />
-  </>
-)
+const ContactPage = () => <Contact />
 
 export default ContactPage
