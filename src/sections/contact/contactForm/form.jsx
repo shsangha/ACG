@@ -128,7 +128,7 @@ const Form = props => {
 
   return (
     <Transition
-      in={!props.confirmed}
+      in={!!!props.confirmed}
       onExited={() => {
         formik.resetForm()
       }}
