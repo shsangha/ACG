@@ -1,21 +1,11 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { Link } from "gatsby"
-import { TweenMax, Power2 } from "gsap"
 import "./style.scss"
 
-const Header = props => {
-  useEffect(() => {
-    TweenMax.staggerTo(
-      ".header_fade",
-      0.7,
-      { opacity: 1, ease: Power2.easeIn },
-      0.3
-    )
-  }, [])
-
+const Header = _props => {
   return (
     <header className="header">
-      <Link className="header_home_link header_fade" to="/">
+      <Link className="header_home_link " to="/" state={{ internalNav: true }}>
         <svg
           className="header_logo"
           xmlns="http://www.w3.org/2000/svg"
@@ -47,13 +37,25 @@ const Header = props => {
         </svg>
       </Link>
       <nav className="header_nav">
-        <Link to="/about" className="header_nav_link header_fade">
+        <Link
+          to="/about"
+          className="header_nav_link "
+          state={{ internalNav: true }}
+        >
           About
         </Link>
-        <Link to="/listings" className="header_nav_link header_fade">
+        <Link
+          to="/listings"
+          className="header_nav_link "
+          state={{ internalNav: true }}
+        >
           Listings
         </Link>
-        <Link to="/contact" className="header_nav_link header_fade">
+        <Link
+          to="/contact"
+          className="header_nav_link "
+          state={{ internalNav: true }}
+        >
           Contact
         </Link>
       </nav>
