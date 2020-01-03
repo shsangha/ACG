@@ -31,6 +31,7 @@ $base-parallax-perspective: 1px;
   @extend .noselect;
   min-width: 100vw;
   position: relative;
+  transform-style: preserve-3d;
 }
 
 .paralax_content {
@@ -43,6 +44,8 @@ $base-parallax-perspective: 1px;
 .img {
   width: 100%;
   height: 100%;
+  backface-visibility: hidden;
+  will-change: opacity;
 }
 
 .img_content {
@@ -153,6 +156,7 @@ $base-parallax-perspective: 1px;
 
   .slide {
     min-width: 50vw;
+    backface-visibility: hidden;
   }
 
   .slider_text {
@@ -182,6 +186,10 @@ $base-parallax-perspective: 1px;
     &:hover {
       filter: none;
     }
+  }
+
+  .paralax_content {
+    backface-visibility: hidden;
   }
 
   .slide:nth-child(2) {
