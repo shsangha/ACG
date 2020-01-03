@@ -4,7 +4,7 @@ import { TimelineLite, Power1 } from "gsap"
 import ContactForm from "../../sections/contact/contactForm"
 import "./style.scss"
 
-const MobileChat = () => {
+const MobileChat = ({ subject }) => {
   const [formOpen, setFormOpen] = useState(false)
 
   return (
@@ -65,7 +65,7 @@ const MobileChat = () => {
               </button>
             </div>
             <ContactForm
-              subject="listing page"
+              subject={subject}
               tabTrab={true}
               callback={() => setFormOpen(false)}
             />
