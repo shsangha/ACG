@@ -11,11 +11,11 @@ let exitTimeline, enterTimeline
 const Layout = props => {
   useEffect(() => {
     new TimelineLite()
-      .to(".transition_slide", 1.5, {
+      .to(".transition_slide", 1, {
         x: "-100vw",
         ease: Power2.easeIn,
       })
-      .to(".container", 1.5, { opacity: 1, ease: Power2.easeIn }, "-=1.25")
+      .to(".container", 1, { opacity: 1, ease: Power2.easeIn }, "-=.75")
   }, [])
 
   return (
@@ -35,9 +35,9 @@ const Layout = props => {
 
           enterTimeline = new TimelineLite()
             .set(".transition_slide", { x: "100vw" })
-            .to(".transition_slide", 0.75, { x: 0 })
-            .to(".transition_slide", 0.75, { x: "-100vw" })
-            .to(node, 1, { opacity: 1, ease: Power2.easeIn }, "-=0.6")
+            .to(".transition_slide", 0.5, { x: 0 })
+            .to(".transition_slide", 0.5, { x: "-100vw" })
+            .to(node, 1, { opacity: 1, ease: Power2.easeIn }, "-=0.35")
         }}
         onExiting={node => {
           if (exitTimeline) {
