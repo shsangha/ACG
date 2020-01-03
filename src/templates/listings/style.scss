@@ -5,6 +5,16 @@
   width: 100%;
   background: black;
   position: relative;
+  padding: 0 2rem;
+  padding-top: 4rem;
+}
+
+.listing_page_listing {
+  margin-top: 5rem;
+}
+
+.listing_page_back_link {
+  color: gainsboro;
 }
 
 .listing_page_type {
@@ -163,7 +173,8 @@
 .listing_page_details_desc,
 .listing_page_details_features_wrapper,
 .listing_page_details_specs_container,
-.listing_page_details_lease_container {
+.listing_page_details_lease_container,
+.listing_page_details_map_container {
   padding-bottom: 3rem;
   margin-bottom: 3rem;
   border-bottom: 1px solid rgba(white, 0.3);
