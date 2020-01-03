@@ -17,13 +17,13 @@ const headers = {
 const handler = (event, _, callback) => {
   const data = JSON.parse(event.body)
 
-  const { name, mail, phone, msg, method } = data
+  const { name, mail, phone, msg, method, subject } = data
 
   const mailOptions = {
     from: `${name} <${mail}>`,
     to: "shawnsangha9@gmail.com",
     replyTo: mail,
-    subject: `Email from website contact form`,
+    subject: `${subject} inquiry from contact form`,
     text: `${msg || " "}`,
   }
 
@@ -31,7 +31,7 @@ const handler = (event, _, callback) => {
     from: "cbrequest@albertacommercialgroup.com",
     to: "shawnsangha9@gmail.com",
     replyTo: "cbrequest@albertacommercialgroup.com",
-    subject: `Callback request from ${name} - ${phone}`,
+    subject: `Callback request from ${name} - ${phone} -- ${subject}`,
     text: `${msg || " "}`,
   }
 
