@@ -16,7 +16,7 @@ lib-cov
 lambda
 .cache
 .env.production
-
+.env.development
 # Coverage directory used by tools like istanbul
 coverage
 
