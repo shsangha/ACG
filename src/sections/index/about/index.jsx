@@ -6,7 +6,7 @@ import DrawSVG from "../../../utils/DrawSVGPlugin"
 
 import "./style.scss"
 
-const About = () => {
+const About = props => {
   useEffect(() => {
     TweenLite.set(".reveal_svg_path", {
       drawSVG: false,
@@ -20,6 +20,13 @@ const About = () => {
       if (element[0].isIntersecting) {
         if (DrawSVG && typeof window !== undefined) {
           const tl = new TimelineMax()
+
+          const aboutPage =
+            props.location.pathname && props.location.pathname === "/about"
+          const internalNav =
+            props.location.state && props.location.state.internalNav
+
+          const delay = aboutPage ? (internalNav ? 0.95 : 1.3) : 0
 
           tl.staggerFromTo(
             `.reveal_svg_path`,
@@ -35,7 +42,8 @@ const About = () => {
                 ease: Power1.easeIn,
               },
             },
-            0.2
+            0.2,
+            `+=${delay}`
           )
         }
         observer.unobserve(element[0].target)
