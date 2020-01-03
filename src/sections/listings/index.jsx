@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react"
 import "./style.scss"
-import { Link, StaticQuery, graphql } from "gatsby"
-import Img from "gatsby-image"
+import { StaticQuery, graphql } from "gatsby"
+import Card from "./Card"
 import { throttle } from "lodash"
 import { Transition } from "react-transition-group"
 
@@ -11,43 +11,14 @@ const Listings = props => {
     property: "all",
     listing: "all",
     sortDesc: true,
+    values: props.allMarkdownRemark.nodes,
   })
-
-  const [values, setValues] = useState(props.allMarkdownRemark.nodes)
 
   const filtersRef = useRef(null)
 
   const toggleFilters = () => {
     setFiltersOpen(prev => !prev)
   }
-
-  useEffect(() => {
-    const list = props.allMarkdownRemark.nodes
-      .filter(({ frontmatter }) => {
-        if (filterValues.property === "all") {
-          return true
-        }
-
-        return frontmatter.PropertyType === filterValues.property
-      })
-      .filter(({ frontmatter }) => {
-        if (filterValues.listing === "all") {
-          return true
-        }
-
-        return frontmatter.ListingType === filterValues.listing
-      })
-
-    if (!filterValues.sortDesc) {
-      list.reverse()
-    }
-    setValues(list)
-  }, [
-    filterValues.property,
-    filterValues.listing,
-    filterValues.sortDesc,
-    props.allMarkdownRemark.nodes,
-  ])
 
   const handleResize = throttle(() => {
     if (window.innerWidth > 700) {
@@ -65,19 +36,57 @@ const Listings = props => {
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
+  const filter = (value, name) => {
+    const propertyFilter =
+      name && name === "property" ? value : filterValues.property
+    const listingFilter =
+      name && name === "listing" ? value : filterValues.listing
+
+    const sortOrder = name ? filterValues.sortDesc : value
+
+    const list = props.allMarkdownRemark.nodes
+      .filter(({ frontmatter }) => {
+        if (propertyFilter === "all") {
+          return true
+        }
+
+        return frontmatter.PropertyType === propertyFilter
+      })
+      .filter(({ frontmatter }) => {
+        if (listingFilter === "all") {
+          return true
+        }
+
+        return frontmatter.ListingType === listingFilter
+      })
+
+    if (!sortOrder) {
+      list.reverse()
+    }
+
+    return list
+  }
+
   const handleSelectChange = event => {
     const { name, value } = event.target
+
+    const values = filter(value, name)
 
     setFilterValues(prev => {
       return {
         ...prev,
         [name]: value,
+        values,
       }
     })
   }
 
   const toggleSortOrder = () => {
-    setFilterValues(prev => ({ ...prev, sortDesc: !prev.sortDesc }))
+    setFilterValues(prev => ({
+      ...prev,
+      sortDesc: !prev.sortDesc,
+      values: filter(!prev.sortDesc),
+    }))
   }
 
   return (
@@ -185,7 +194,7 @@ const Listings = props => {
               onClick={toggleSortOrder}
               className="listings_sort_btn"
             >
-              Date{" "}
+              Date
               <span
                 className={`listing_arrow ${
                   filterValues.sortDesc ? "" : "asc"
@@ -198,7 +207,7 @@ const Listings = props => {
         </div>
       </div>
 
-      <Transition timeout={700} in={filtersOpen}>
+      <Transition unmountOnExit timeout={700} in={filtersOpen}>
         {status => (
           // eslint-disable-next-line jsx-a11y/click-events-have-key-events
           <div
@@ -208,45 +217,24 @@ const Listings = props => {
         )}
       </Transition>
 
-      <section className="listings_cards_wrapper">
-        {values.map(
-          ({
-            id,
-            frontmatter: {
-              title,
-              Description,
-              Loacation,
-              Images,
-              PropertyType,
-              ListingType,
-            },
-          }) => {
+      <div className="listings_cards_wrapper">
+        {filterValues.values.length > 0 ? (
+          filterValues.values.map(({ id, frontmatter }, index) => {
             return (
-              <Link key={id} className="listings_card" to="/listings/fake">
-                <h3 className="listings_card_listing_type">
-                  For {ListingType}
-                </h3>
-                <Img
-                  className="listing_card_img"
-                  fluid={Images[0] ? Images[0].childImageSharp.fluid : null}
-                />
-                <div className="listings_card_content">
-                  <h2 className="listings_card_title">{title}</h2>
-                  {Loacation && (
-                    <span className="listings_card_address">{Loacation}</span>
-                  )}
-                  {Description && (
-                    <p className="listings_card_desc">{Description}</p>
-                  )}
-                  <span className="listing_card_property_type">
-                    {PropertyType}
-                  </span>
-                </div>
-              </Link>
+              <Card
+                key={id}
+                index={index}
+                id={id}
+                fallback={props.fallbackImg.childImageSharp.fluid}
+                status={status}
+                {...frontmatter}
+              />
             )
-          }
+          })
+        ) : (
+          <h3 className="no_results">No results. Try another query</h3>
         )}
-      </section>
+      </div>
     </div>
   )
 }
@@ -256,6 +244,14 @@ export default props => (
   <StaticQuery
     query={graphql`
       {
+        fallbackImg: file(relativePath: { eq: "logo.jpg" }) {
+          childImageSharp {
+            fluid(maxWidth: 450) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+
         allMarkdownRemark(
           filter: { frontmatter: { Type: { eq: "listing" } } }
           sort: { fields: [frontmatter___date], order: DESC }
