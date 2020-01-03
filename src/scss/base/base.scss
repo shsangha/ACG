@@ -1,5 +1,6 @@
 @import "../mixins/respond.scss";
 @import "../typography/typography.scss";
+@import "../variables/color.scss";
 *,
 *::after,
 *::before {
@@ -14,9 +15,13 @@ button:active {
   opacity: 1;
 }
 
-a,
-button {
-  cursor: pointer;
+*,
+*:active,
+*:hover,
+*:visited,
+*:focus {
+  outline: none;
+  cursor: none;
 }
 
 html {
@@ -43,4 +48,39 @@ body {
   box-sizing: border-box;
   position: relative;
   background: #050505;
+  overflow-x: hidden;
+}
+
+.hightlight_hover {
+  position: relative;
+
+  &:after {
+    position: absolute;
+    bottom: -0.5rem;
+    left: 0;
+    width: 100%;
+    background: $color-gold;
+    height: 2px;
+    transform-origin: 0 0;
+    transform: scaleX(0);
+    content: "";
+    transition: transform 0.3s ease-in;
+  }
+
+  &:hover {
+    &:after {
+      transform: scaleX(1);
+    }
+  }
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+* {
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+body {
+  scrollbar-width: none;
 }

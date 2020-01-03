@@ -89,8 +89,9 @@
 }
 
 .about_desc_item_link {
-  padding: 2rem 0;
+  margin: 2rem 0;
   color: $color-gold;
+  align-self: flex-start;
 }
 
 .about_page_team_header {
