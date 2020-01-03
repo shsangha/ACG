@@ -1,12 +1,16 @@
 const Path = require("path")
 
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 const { fmImagesToRelative } = require("gatsby-remark-relative-images")
 
 exports.onCreateNode = ({ node }) => {
   fmImagesToRelative(node)
 }
 
-exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
   actions.setWebpackConfig({
     module: {
       rules:
@@ -55,6 +59,11 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
         ),
       },
     },
+    plugins: [
+      plugins.define({
+        "process.env.GOOGLE": JSON.stringify(`${process.env.GOOGLE_KEY}`),
+      }),
+    ],
   })
 }
 
