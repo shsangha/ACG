@@ -5,23 +5,26 @@ const Footer = () => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       elements => {
-        elements.forEach(element => {
+        for (let i = 0; i < elements.length; i++) {
+          const element = elements[i]
+
           if (element.isIntersecting) {
             element.target.classList.add("intersected")
 
             observer.unobserve(element.target)
           }
-        })
+        }
       },
       { threshold: 1 }
     )
 
-    document.querySelectorAll(".footer_animate_in").forEach(
-      item => {
-        observer.observe(item)
-      },
-      { threshold: 0.5 }
-    )
+    const list = document.querySelectorAll(".footer_animate_in")
+
+    for (let i = 0; i < list.length; i++) {
+      const item = list[i]
+
+      observer.observe(item, { threshold: 0.5 })
+    }
   }, [])
 
   return (
