@@ -1,3 +1,3 @@
-require("intersection-observer");
+import "./src/scss/base/base.scss"
 
-import "./src/scss/base/base.scss";
+require("intersection-observer")
