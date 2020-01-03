@@ -226,7 +226,6 @@ const Listings = props => {
                 index={index}
                 id={id}
                 fallback={props.fallbackImg.childImageSharp.fluid}
-                status={status}
                 {...frontmatter}
               />
             )

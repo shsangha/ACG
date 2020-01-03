@@ -50,11 +50,7 @@ class Card extends Component {
     } = this.props
 
     return (
-      <Link
-        ref={this.cardRef}
-        className={`listings_card ${status}`}
-        to={`/listings/${id}`}
-      >
+      <Link ref={this.cardRef} className="listings_card" to={`/listings/${id}`}>
         <h3 className="listings_card_listing_type">For {ListingType}</h3>
         <Img
           className="listing_card_img"
