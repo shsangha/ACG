@@ -61,6 +61,7 @@ const Slider = props => {
             rotationX: "-2deg",
             opacity: 0,
             ease: Power2.easeOut,
+            z: 0,
           },
           "-=0.8"
         )
@@ -70,26 +71,14 @@ const Slider = props => {
       })
 
       new ScrollMagic.Scene({
-        triggerElement: ".header",
         triggerHook: "onLeave",
         offset: 30,
         duration: "100%",
       })
         .setClassToggle(`.paralax_content`, `scrolling`)
         .setTween(tl)
-        //  .addIndicators()
         .addTo(controller)
     }
-  }, [])
-
-  useEffect(() => {
-    new TimelineMax()
-      .set(".container", { overflowY: "hidden" })
-      .to(".slider_cover", 1.5, {
-        x: "-100%",
-        ease: Power2.easeIn,
-      })
-      .set(".container", { overflowY: "scroll" })
   }, [])
 
   const nextSlide = throttle(() => {
@@ -217,7 +206,6 @@ const Slider = props => {
           View All Listings
         </Link>
       </div>
-      <div className="slider_cover" />
     </div>
   )
 }
