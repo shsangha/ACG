@@ -4,12 +4,13 @@ import { TimelineLite, Power1 } from "gsap"
 import ContactForm from "../../sections/contact/contactForm"
 import "./style.scss"
 
-const MobileChat = ({ subject }) => {
+const MobileChat = ({ subject, focusLink }) => {
   const [formOpen, setFormOpen] = useState(false)
 
   return (
     <>
       <button
+        {...focusLink()}
         onClick={() => {
           new TimelineLite()
             .to(".container", 0.5, {
@@ -56,6 +57,7 @@ const MobileChat = ({ subject }) => {
             <div className="listing_hero_mobile_header">
               <h2 className="listing_hero_mobile_header_text">Get In Touch</h2>
               <button
+                {...focusLink()}
                 onClick={() => {
                   setFormOpen(false)
                 }}

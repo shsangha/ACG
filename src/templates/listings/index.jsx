@@ -6,9 +6,10 @@ import Carousel from "@brainhubeu/react-carousel"
 import Img from "gatsby-image/withIEPolyfill"
 import "@brainhubeu/react-carousel/lib/style.css"
 import Seo from "../../components/seo"
+import cursorContextWrapper from '../../components/contextWrapper'
 
-const Listing = props => {
-  const { frontmatter } = props.data.listings.edges[0].node
+const Listing = ({data, focusLink}) => {
+  const { frontmatter } = data.listings.edges[0].node
 
   const [carouselValue, setCarouselValue] = useState(0)
 
@@ -42,7 +43,7 @@ const Listing = props => {
         }
       />
       <div className="listing_page">
-        <Link className="listing_page_back_link" to="/listings">
+        <Link {...focusLink()} className="listing_page_back_link hightlight_hover" to="/listings">
           Back to Listings
         </Link>
 
@@ -170,6 +171,7 @@ const Listing = props => {
               <div className="listing_hero_links">
                 {frontmatter.Brochure && frontmatter.Brochure.relativePath && (
                   <a
+                    {...focusLink()}
                     download
                     href={frontmatter.Brochure.relativePath}
                     className="listing_hero_download_link black"
@@ -177,7 +179,7 @@ const Listing = props => {
                     Download PDF
                   </a>
                 )}
-                <MobileChat subject={frontmatter.title} />
+                <MobileChat subject={frontmatter.title} focusLink={focusLink} />
               </div>
             </div>
           </div>
@@ -268,7 +270,7 @@ const Listing = props => {
   )
 }
 
-export default Listing
+export default cursorContextWrapper(Listing)
 
 export const query = graphql`
   query Pages($id: String!, $target: String!) {

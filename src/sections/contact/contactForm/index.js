@@ -3,6 +3,7 @@ import ConfirmCard from "./confirm"
 import Form from "./form"
 import "./style.scss"
 import PropTypes from "prop-types"
+import cursorContextWrapper from '../../../components/contextWrapper'
 
 const ContactForm = props => {
   const [confirmed, setConfirmed] = useState(false)
@@ -29,4 +30,4 @@ ContactForm.propTypes = {
   subject: PropTypes.string,
 }
 
-export default ContactForm
+export default cursorContextWrapper(ContactForm)

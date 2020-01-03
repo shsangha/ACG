@@ -1,11 +1,12 @@
 import React from "react"
 import Main from "../sections/index/slideshow"
 import About from "../sections/index/about"
+import cursorContextWrapper from "../components/contextWrapper"
 
 const Index = props => (
   <>
-    <Main />
+    <Main {...props} />
     <About {...props} />
   </>
 )
-export default Index
+export default cursorContextWrapper(Index)

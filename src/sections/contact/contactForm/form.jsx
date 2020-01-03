@@ -140,17 +140,20 @@ const Form = props => {
       <>
         <div className="contact_form_toggles">
           <button
+            {...props.focusLink()}
             ref={firstRef}
             onClick={() => setMethod("mail")}
-            className={`contact_form_button ${
+            className={`contact_form_button hightlight_hover ${
               method === "mail" ? "selected" : ""
             }`}
           >
             Send Mail
           </button>
           <button
+                      {...props.focusLink()}
+
             onClick={() => setMethod("phone")}
-            className={`contact_form_button ${
+            className={`contact_form_button hightlight_hover ${
               method === "mail" ? "" : "selected"
             }`}
           >
@@ -334,7 +337,7 @@ const Form = props => {
             </div>
           </div>
 
-          <button ref={lastRef} className="contact_submit_wrapper">
+          <button ref={lastRef} {...props.focusLink()} className="contact_submit_wrapper">
             <p type="submit" className="contact_submit_text">
               Send
             </p>

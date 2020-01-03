@@ -5,13 +5,13 @@ import Card from "./Card"
 import { throttle } from "lodash"
 import { Transition } from "react-transition-group"
 
-const Listings = props => {
+const Listings = ({ allMarkdownRemark, focusLink, fallbackImg }) => {
   const [filtersOpen, setFiltersOpen] = useState(false)
   const [filterValues, setFilterValues] = useState({
     property: "all",
     listing: "all",
     sortDesc: true,
-    values: props.allMarkdownRemark.nodes,
+    values: allMarkdownRemark.nodes,
   })
 
   const filtersRef = useRef(null)
@@ -44,7 +44,7 @@ const Listings = props => {
 
     const sortOrder = name ? filterValues.sortDesc : value
 
-    const list = props.allMarkdownRemark.nodes
+    const list = allMarkdownRemark.nodes
       .filter(({ frontmatter }) => {
         if (propertyFilter === "all") {
           return true
@@ -94,6 +94,7 @@ const Listings = props => {
       <div className="listings_menuBar">
         <div className="listings_filters">
           <button
+            {...focusLink()}
             className={`listings_filter_toggle  ${
               filtersOpen ? "btnopen" : ""
             }`}
@@ -130,6 +131,7 @@ const Listings = props => {
                       Listing Type
                     </label>
                     <select
+                      {...focusLink()}
                       onChange={handleSelectChange}
                       value={filterValues.lisitng}
                       name="listing"
@@ -155,6 +157,7 @@ const Listings = props => {
                       Property Type
                     </label>
                     <select
+                      {...focusLink()}
                       name="property"
                       onChange={handleSelectChange}
                       value={filterValues.property}
@@ -188,6 +191,7 @@ const Listings = props => {
           <div className="listings_sort">
             <span className="listings_sort_text">Sort:</span>
             <button
+              {...focusLink()}
               aria-label={`sort date ${
                 filterValues.sortDesc ? "ascending" : "descending"
               }`}
@@ -225,7 +229,7 @@ const Listings = props => {
                 key={id}
                 index={index}
                 id={id}
-                fallback={props.fallbackImg.childImageSharp.fluid}
+                fallback={fallbackImg.childImageSharp.fluid}
                 {...frontmatter}
               />
             )

@@ -1,12 +1,21 @@
-import React, { useEffect } from "react"
+import React, { useEffect, createContext } from "react"
 import "./style.scss"
 import { TransitionGroup, Transition } from "react-transition-group"
 import { TimelineLite, Power2 } from "gsap"
 import Seo from "../components/seo"
 import Header from "../components/header"
 import Footer from "../components/footer"
+import Cursor from "../components/cursor"
 
 let exitTimeline, enterTimeline
+
+// add the cursor context
+
+
+export const CursorContext = createContext({
+  focusLink: () => {},
+  contrastCursor: () => {},
+})
 
 const Layout = props => {
   useEffect(() => {
@@ -16,50 +25,60 @@ const Layout = props => {
         ease: Power2.easeIn,
       })
       .to(".container", 1, { opacity: 1, ease: Power2.easeIn }, "-=.75")
+      .set(".transition_slide", { display: "none" })
   }, [])
 
   return (
-    <TransitionGroup>
-      <Transition
-        key={props.location.pathname}
-        timeout={{
-          enter: 2000,
-          exit: 600,
-        }}
-        appear={false}
-        onEntering={node => {
-          if (enterTimeline) {
-            enterTimeline.progress(100)
-            enterTimeline.clear()
-          }
+    <Cursor>
+      {({ wrapLink, focusLink }) => (
+        <>
+          <TransitionGroup>
+            <Transition
+              key={props.location.pathname}
+              timeout={{
+                enter: 2000,
+                exit: 600,
+              }}
+              appear={false}
+              onEntering={node => {
+                if (enterTimeline) {
+                  enterTimeline.progress(100)
+                  enterTimeline.clear()
+                }
 
-          enterTimeline = new TimelineLite()
-            .set(".transition_slide", { x: "100vw" })
-            .to(".transition_slide", 0.5, { x: 0 })
-            .to(".transition_slide", 0.5, { x: "-100vw" })
-            .to(node, 1, { opacity: 1, ease: Power2.easeIn }, "-=0.35")
-        }}
-        onExiting={node => {
-          if (exitTimeline) {
-            exitTimeline.progress(100)
-            exitTimeline.clear()
-          }
+                enterTimeline = new TimelineLite()
+                  .set(".transition_slide", { x: "100vw", display: "block" })
+                  .to(".transition_slide", 0.5, { x: 0 })
+                  .to(".transition_slide", 0.5, { x: "-100vw" })
+                  .to(node, 1, { opacity: 1, ease: Power2.easeIn }, "-=0.35")
+                  .set(".transition_slide", { display: "none" })
+              }}
+              onExiting={node => {
+                if (exitTimeline) {
+                  exitTimeline.progress(100)
+                  exitTimeline.clear()
+                }
 
-          exitTimeline = new TimelineLite().to(node, 0.6, {
-            opacity: 0,
-            ease: Power2.easeOut,
-          })
-        }}
-      >
-        <div id="container" className="container">
-          <Seo />
-          <Header />
-          {props.children}
-          <Footer />
+                exitTimeline = new TimelineLite().to(node, 0.6, {
+                  opacity: 0,
+                  ease: Power2.easeOut,
+                })
+              }}
+            >
+              <CursorContext.Provider value={{focusLink, wrapLink}}>
+              <div id="container" className="container">
+                <Seo />
+                <Header />
+                {props.children}
+                <Footer />
+              </div>
+              </CursorContext.Provider>
+            </Transition>
+          </TransitionGroup>
           <div className="transition_slide" />
-        </div>
-      </Transition>
-    </TransitionGroup>
+        </>
+      )}
+    </Cursor>
   )
 }
 
