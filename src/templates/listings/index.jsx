@@ -1,12 +1,11 @@
 import React, { useState } from "react"
-import { graphql } from "gatsby"
-import Header from "../../components/header"
-import Footer from "../../components/footer"
+import { graphql, Link } from "gatsby"
 import MobileChat from "../MobileChat"
 import "./style.scss"
 import Carousel from "@brainhubeu/react-carousel"
 import Img from "gatsby-image/withIEPolyfill"
 import "@brainhubeu/react-carousel/lib/style.css"
+import Seo from "../../components/seo"
 
 const Listing = props => {
   const { frontmatter } = props.data.listings.edges[0].node
@@ -33,8 +32,20 @@ const Listing = props => {
 
   return (
     <>
-      <Header />
+      <Seo
+        title={frontmatter.title}
+        desc={frontmatter.Description}
+        banner={
+          frontmatter.Images && frontmatter.Images[0]
+            ? frontmatter.Images[0].childImageSharp.fluid.src
+            : null
+        }
+      />
       <div className="listing_page">
+        <Link className="listing_page_back_link" to="/listings">
+          Back to Listings
+        </Link>
+
         <div className="listing_page_listing">
           <h3 className="listing_page_type">For Lease</h3>
 
@@ -46,72 +57,88 @@ const Listing = props => {
                 draggable={false}
                 className="listing_page_slider"
               >
-                {frontmatter.Images.map(image => (
-                  <div
-                    key={image.childImageSharp.fluid.src}
-                    style={{ width: "100%" }}
-                  >
+                {frontmatter.Images ? (
+                  frontmatter.Images.map(image => (
+                    <div
+                      key={image.childImageSharp.fluid.src}
+                      style={{ width: "100%" }}
+                    >
+                      <Img
+                        style={{}}
+                        className="listing_page_slide"
+                        fluid={image.childImageSharp.fluid}
+                        objectFit="contain"
+                        objectPosition="50% 50%"
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <div style={{ width: "100%" }}>
                     <Img
                       style={{}}
                       className="listing_page_slide"
-                      fluid={image.childImageSharp.fluid}
+                      fluid={props.data.fallbackImg.childImageSharp.fluid}
                       objectFit="contain"
                       objectPosition="50% 50%"
                     />
                   </div>
-                ))}
+                )}
               </Carousel>
-              <div className="carousel_dots_wrapper">
-                {frontmatter.Images.map((_, index) => (
+              {frontmatter.Images && (
+                <>
+                  <div className="carousel_dots_wrapper">
+                    {frontmatter.Images.map((_, index) => (
+                      <button
+                        className={`carousel_dot ${
+                          index === carouselValue ? "selected" : ""
+                        }`}
+                        key={index}
+                        onClick={() => {
+                          setCarouselValue(index)
+                        }}
+                      />
+                    ))}
+                  </div>
                   <button
-                    className={`carousel_dot ${
-                      index === carouselValue ? "selected" : ""
-                    }`}
-                    key={index}
-                    onClick={() => {
-                      setCarouselValue(index)
-                    }}
-                  />
-                ))}
-              </div>
-              <button
-                className="carousel_button left"
-                onClick={handleArrowLeft}
-              >
-                <svg
-                  className="listing_page_arrow"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 30.22 30.28"
-                >
-                  <polyline
-                    className="arrow_path left"
-                    points="0.07 0.14 30.07 14.74 30.07 15.54 0.07 30.14"
-                    fill="none"
-                    stroke="#231f20"
-                    strokeMiterlimit="10"
-                    strokeWidth="1"
-                  />
-                </svg>
-              </button>{" "}
-              <button
-                className="carousel_button right"
-                onClick={handleArrowRight}
-              >
-                <svg
-                  className="listing_page_arrow"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 30.22 30.28"
-                >
-                  <polyline
-                    className="arrow_path "
-                    points="0.07 0.14 30.07 14.74 30.07 15.54 0.07 30.14"
-                    fill="none"
-                    stroke="#231f20"
-                    strokeMiterlimit="10"
-                    strokeWidth="1"
-                  />
-                </svg>
-              </button>
+                    className="carousel_button left"
+                    onClick={handleArrowLeft}
+                  >
+                    <svg
+                      className="listing_page_arrow"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 30.22 30.28"
+                    >
+                      <polyline
+                        className="arrow_path left"
+                        points="0.07 0.14 30.07 14.74 30.07 15.54 0.07 30.14"
+                        fill="none"
+                        stroke="#231f20"
+                        strokeMiterlimit="10"
+                        strokeWidth="1"
+                      />
+                    </svg>
+                  </button>{" "}
+                  <button
+                    className="carousel_button right"
+                    onClick={handleArrowRight}
+                  >
+                    <svg
+                      className="listing_page_arrow"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 30.22 30.28"
+                    >
+                      <polyline
+                        className="arrow_path "
+                        points="0.07 0.14 30.07 14.74 30.07 15.54 0.07 30.14"
+                        fill="none"
+                        stroke="#231f20"
+                        strokeMiterlimit="10"
+                        strokeWidth="1"
+                      />
+                    </svg>
+                  </button>
+                </>
+              )}
             </div>
           </div>
           <div className="listing_hero_header">
@@ -150,7 +177,7 @@ const Listing = props => {
                     Download PDF
                   </a>
                 )}
-                <MobileChat />
+                <MobileChat subject={frontmatter.title} />
               </div>
             </div>
           </div>
@@ -226,7 +253,9 @@ const Listing = props => {
                       style={{ border: "0" }}
                       allowFullScreen=""
                       title="map"
-                      src={frontmatter.Map}
+                      src={`https://www.google.com/maps/embed/v1/place?key=${
+                        process.env.GOOGLE
+                      }&q=place_id:${`ChIJJWu2dDhpcVMRLy8dtmqy0hs`}`}
                     />
                   </div>
                 </div>
@@ -235,7 +264,6 @@ const Listing = props => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   )
 }
@@ -244,6 +272,14 @@ export default Listing
 
 export const query = graphql`
   query Pages($id: String!, $target: String!) {
+    fallbackImg: file(relativePath: { eq: "logo.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 900) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+
     agent: allMarkdownRemark(
       filter: { frontmatter: { title: { eq: $target } } }
     ) {
