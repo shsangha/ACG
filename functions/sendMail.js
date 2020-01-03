@@ -23,7 +23,7 @@ const handler = (event, _, callback) => {
     from: `${name} <${mail}>`,
     to: "shawnsangha9@gmail.com",
     replyTo: mail,
-    subject: `${subject} inquiry from contact form`,
+    subject: `${subject} -- inquiry from contact form`,
     text: `${msg || " "}`,
   }
 
