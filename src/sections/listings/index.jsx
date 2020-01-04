@@ -5,7 +5,7 @@ import Card from "./Card"
 import { throttle } from "lodash"
 import { Transition } from "react-transition-group"
 
-const Listings = ({ allMarkdownRemark, focusLink, fallbackImg }) => {
+const Listings = ({ allMarkdownRemark, fallbackImg }) => {
   const [filtersOpen, setFiltersOpen] = useState(false)
   const [filterValues, setFilterValues] = useState({
     property: "all",
@@ -94,7 +94,6 @@ const Listings = ({ allMarkdownRemark, focusLink, fallbackImg }) => {
       <div className="listings_menuBar">
         <div className="listings_filters">
           <button
-            {...focusLink()}
             className={`listings_filter_toggle  ${
               filtersOpen ? "btnopen" : ""
             }`}
@@ -131,7 +130,6 @@ const Listings = ({ allMarkdownRemark, focusLink, fallbackImg }) => {
                       Listing Type
                     </label>
                     <select
-                      {...focusLink()}
                       onChange={handleSelectChange}
                       value={filterValues.lisitng}
                       name="listing"
@@ -157,7 +155,6 @@ const Listings = ({ allMarkdownRemark, focusLink, fallbackImg }) => {
                       Property Type
                     </label>
                     <select
-                      {...focusLink()}
                       name="property"
                       onChange={handleSelectChange}
                       value={filterValues.property}
@@ -191,7 +188,6 @@ const Listings = ({ allMarkdownRemark, focusLink, fallbackImg }) => {
           <div className="listings_sort">
             <span className="listings_sort_text">Sort:</span>
             <button
-              {...focusLink()}
               aria-label={`sort date ${
                 filterValues.sortDesc ? "ascending" : "descending"
               }`}

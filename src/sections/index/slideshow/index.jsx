@@ -12,7 +12,7 @@ import { throttle } from "lodash"
 
 import Slide from "./slide"
 
-const Slider = ({allMarkdownRemark, focusLink}) => {
+const Slider = ({ allMarkdownRemark }) => {
   const [order, setOrder] = useState(
     (() => {
       const filteredProps = allMarkdownRemark.nodes.filter(
@@ -158,7 +158,7 @@ const Slider = ({allMarkdownRemark, focusLink}) => {
           )
         })}
       </div>
-      <button  onClick={prevSlide} className="prev_slide_btn">
+      <button onClick={prevSlide} className="prev_slide_btn">
         <svg
           className="slide_btn_svg"
           xmlns="http://www.w3.org/2000/svg"
@@ -174,7 +174,7 @@ const Slider = ({allMarkdownRemark, focusLink}) => {
           />
         </svg>
       </button>
-      <button  onClick={nextSlide} className="next_slide_btn">
+      <button onClick={nextSlide} className="next_slide_btn">
         <svg
           className="slide_btn_svg"
           xmlns="http://www.w3.org/2000/svg"
@@ -193,7 +193,6 @@ const Slider = ({allMarkdownRemark, focusLink}) => {
 
       <div className="slider_text">
         <Link
-          {...focusLink()}
           className="more slider_link hightlight_hover"
           key={order[2]}
           to={`/listings/${
@@ -203,7 +202,7 @@ const Slider = ({allMarkdownRemark, focusLink}) => {
           {order[2].frontmatter.title}
         </Link>
 
-        <Link {...focusLink()} className="slider_link hightlight_hover" to="/listings">
+        <Link className="slider_link hightlight_hover" to="/listings">
           View All Listings
         </Link>
       </div>

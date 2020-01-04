@@ -6,9 +6,8 @@ import Carousel from "@brainhubeu/react-carousel"
 import Img from "gatsby-image/withIEPolyfill"
 import "@brainhubeu/react-carousel/lib/style.css"
 import Seo from "../../components/seo"
-import cursorContextWrapper from '../../components/contextWrapper'
 
-const Listing = ({data, focusLink}) => {
+const Listing = ({ data }) => {
   const { frontmatter } = data.listings.edges[0].node
 
   const [carouselValue, setCarouselValue] = useState(0)
@@ -43,7 +42,10 @@ const Listing = ({data, focusLink}) => {
         }
       />
       <div className="listing_page">
-        <Link {...focusLink()} className="listing_page_back_link hightlight_hover" to="/listings">
+        <Link
+          className="listing_page_back_link hightlight_hover"
+          to="/listings"
+        >
           Back to Listings
         </Link>
 
@@ -78,7 +80,7 @@ const Listing = ({data, focusLink}) => {
                     <Img
                       style={{}}
                       className="listing_page_slide"
-                      fluid={props.data.fallbackImg.childImageSharp.fluid}
+                      fluid={data.fallbackImg.childImageSharp.fluid}
                       objectFit="contain"
                       objectPosition="50% 50%"
                     />
@@ -171,7 +173,6 @@ const Listing = ({data, focusLink}) => {
               <div className="listing_hero_links">
                 {frontmatter.Brochure && frontmatter.Brochure.relativePath && (
                   <a
-                    {...focusLink()}
                     download
                     href={frontmatter.Brochure.relativePath}
                     className="listing_hero_download_link black"
@@ -179,7 +180,7 @@ const Listing = ({data, focusLink}) => {
                     Download PDF
                   </a>
                 )}
-                <MobileChat subject={frontmatter.title} focusLink={focusLink} />
+                <MobileChat subject={frontmatter.title} />
               </div>
             </div>
           </div>
@@ -270,7 +271,7 @@ const Listing = ({data, focusLink}) => {
   )
 }
 
-export default cursorContextWrapper(Listing)
+export default Listing
 
 export const query = graphql`
   query Pages($id: String!, $target: String!) {

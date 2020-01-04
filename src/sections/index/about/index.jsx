@@ -6,7 +6,7 @@ import DrawSVG from "../../../utils/DrawSVGPlugin"
 
 import "./style.scss"
 
-const About = ({focusLink, location}) => {
+const About = ({ location }) => {
   useEffect(() => {
     TweenLite.set(".reveal_svg_path", {
       drawSVG: false,
@@ -21,10 +21,8 @@ const About = ({focusLink, location}) => {
         if (DrawSVG && typeof window !== undefined) {
           const tl = new TimelineMax()
 
-          const aboutPage =
-            location.pathname && location.pathname === "/about"
-          const internalNav =
-            location.state && location.state.internalNav
+          const aboutPage = location.pathname && location.pathname === "/about"
+          const internalNav = location.state && location.state.internalNav
 
           const delay = aboutPage ? (internalNav ? 0.95 : 1.3) : 0
 
@@ -249,13 +247,16 @@ const About = ({focusLink, location}) => {
 
                   <div className="about_desc_item_wrapper about_animate_in about_side_fade">
                     <p className="about_desc_item_text  ">{about}</p>
-                    <a  {...focusLink()}
+                    <a
                       className="about_desc_item_link hightlight_hover"
                       href={`mailto:${Email}`}
                     >
                       {Email}
                     </a>
-                    <a  {...focusLink()} className="about_desc_item_link hightlight_hover" href={`tel:${Phone}`}>
+                    <a
+                      className="about_desc_item_link hightlight_hover"
+                      href={`tel:${Phone}`}
+                    >
                       {Phone}
                     </a>
                   </div>

@@ -1,17 +1,11 @@
 import React from "react"
 import { Link } from "gatsby"
 import "./style.scss"
-import cursorContextWrapper from "../contextWrapper"
 
-const Header = ({ wrapLink, focusLink }) => {
+const Header = () => {
   return (
     <header className="header">
-      <Link
-        className="header_home_link "
-        to="/"
-        state={{ internalNav: true }}
-        {...focusLink()}
-      >
+      <Link className="header_home_link " to="/" state={{ internalNav: true }}>
         <svg
           className="header_logo"
           xmlns="http://www.w3.org/2000/svg"
@@ -46,27 +40,24 @@ const Header = ({ wrapLink, focusLink }) => {
         <Link
           activeClassName="active"
           to="/about"
-          className="header_nav_link "
+          className="header_nav_link hightlight_hover "
           state={{ internalNav: true }}
-          {  ...wrapLink()}
         >
           About
         </Link>
         <Link
           activeClassName="active"
           to="/listings"
-          className="header_nav_link "
+          className="header_nav_link hightlight_hover "
           state={{ internalNav: true }}
-          {...wrapLink()}
         >
           Listings
         </Link>
         <Link
           activeClassName="active"
           to="/contact"
-          className="header_nav_link "
+          className="header_nav_link hightlight_hover "
           state={{ internalNav: true }}
-          {...wrapLink()}
         >
           Contact
         </Link>
@@ -75,4 +66,4 @@ const Header = ({ wrapLink, focusLink }) => {
   )
 }
 
-export default cursorContextWrapper(Header)
+export default Header

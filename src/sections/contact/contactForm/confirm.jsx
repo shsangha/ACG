@@ -137,7 +137,6 @@ const ConfirmationCard = props => {
                 />
               </svg>
               <button
-                {...props.focusLink()}
                 focus
                 onClick={resetForm}
                 className="contact_confirm_back_btn"
