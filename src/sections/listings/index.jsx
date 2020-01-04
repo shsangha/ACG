@@ -164,9 +164,6 @@ const Listings = ({ allMarkdownRemark, fallbackImg }) => {
                       <option className="listing_option" value="all">
                         All
                       </option>
-                      <option className="listing_option" value="commercial">
-                        Commercial
-                      </option>
                       <option className="listing_option" value="retail">
                         Retail
                       </option>
@@ -176,9 +173,27 @@ const Listings = ({ allMarkdownRemark, fallbackImg }) => {
                       <option className="listing_option" value="industrial">
                         Industrial
                       </option>
-                      <option className="listing_option" value="hotel">
-                        Hotel/Motel
+                      <option className="listing_option" value="land">
+                        Land
                       </option>
+                      <option className="listing_option" value="business">
+                        Business
+                      </option>
+
+                      {filterValues.listing === "sale" ||
+                        (filterValues.listing === "all" && (
+                          <>
+                            <option
+                              className="listing_option"
+                              value="commercial"
+                            >
+                              Commercial
+                            </option>
+                            <option className="listing_option" value="hotel">
+                              Hotel/Motel
+                            </option>
+                          </>
+                        ))}
                     </select>
                   </li>
                 </ul>
@@ -206,7 +221,6 @@ const Listings = ({ allMarkdownRemark, fallbackImg }) => {
           </div>
         </div>
       </div>
-
       <Transition unmountOnExit timeout={700} in={filtersOpen}>
         {status => (
           // eslint-disable-next-line jsx-a11y/click-events-have-key-events
@@ -216,7 +230,6 @@ const Listings = ({ allMarkdownRemark, fallbackImg }) => {
           />
         )}
       </Transition>
-
       <div className="listings_cards_wrapper">
         {filterValues.values.length > 0 ? (
           filterValues.values.map(({ id, frontmatter }, index) => {

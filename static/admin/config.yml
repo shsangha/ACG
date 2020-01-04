@@ -84,7 +84,16 @@ collections:
       - label: "Property Type"
         name: "PropertyType"
         widget: "select"
-        options: ["commercial", "retail", "office", "industrial", "hotel"]
+        options:
+          [
+            "commercial",
+            "retail",
+            "office",
+            "industrial",
+            "hotel",
+            "land",
+            "business",
+          ]
         required: true
 
       - label: "Listing Type"
