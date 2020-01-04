@@ -105,7 +105,6 @@ const Footer = () => {
                 <div className="footer_contact">
                   <h5 className="footer_label">Gurjant Gill</h5>
                   <a
-                    
                     href="tel:14036083406"
                     className="footer_link hightlight_hover"
                   >
@@ -115,7 +114,6 @@ const Footer = () => {
                 <div className="footer_contact">
                   <h5 className="footer_label">Paul Gill</h5>
                   <a
-                    
                     href="tel:14036083406"
                     className="footer_link hightlight_hover"
                   >
@@ -125,7 +123,6 @@ const Footer = () => {
                 <div className="footer_contact">
                   <h5 className="footer_label">Jim Lee</h5>
                   <a
-                    
                     href="tel:14036083406"
                     className="footer_link hightlight_hover"
                   >
@@ -137,7 +134,6 @@ const Footer = () => {
             <div className="footer_field footer_animate_in footer_fade">
               <h4 className="footer_label main_label">Email</h4>
               <a
-                
                 className="footer_link hightlight_hover"
                 href="mailto:info@albertacommercialgroup.com"
               >
@@ -147,7 +143,6 @@ const Footer = () => {
             <div className="footer_field footer_animate_in footer_fade">
               <h4 className="footer_label main_label">Facebook</h4>
               <a
-                
                 className="footer_link hightlight_hover"
                 href="https://facebook.com/albertacommercialgroup"
               >
@@ -157,7 +152,6 @@ const Footer = () => {
             <div className="footer_field footer_animate_in footer_fade">
               <h4 className="footer_label main_label">Address</h4>
               <a
-                
                 className="footer_link hightlight_hover"
                 href="https://www.google.ca/maps/place/3009+23+St+NE,+Calgary,+AB+T2E+8Z5/@51.0792407,-114.0075074,17z/data=!3m1!4b1!4m5!3m4!1s0x537164e0a0f29c39:0xf77883216d6e5750!8m2!3d51.0792374!4d-114.0053187"
               >
@@ -165,7 +159,7 @@ const Footer = () => {
               </a>
             </div>
           </div>
-        </div>{" "}
+        </div>
       </div>
     </footer>
   )
