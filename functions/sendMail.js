@@ -21,7 +21,7 @@ const handler = (event, _, callback) => {
 
   const mailOptions = {
     from: `${name} <${mail}>`,
-    to: "shawnsangha9@gmail.com",
+    to: "info@albertacommercialgroup.com",
     replyTo: mail,
     subject: `${subject} -- inquiry from contact form`,
     text: `${msg || " "}`,
@@ -29,7 +29,7 @@ const handler = (event, _, callback) => {
 
   const phoneOptions = {
     from: "cbrequest@albertacommercialgroup.com",
-    to: "shawnsangha9@gmail.com",
+    to: "info@albertacommercialgroup.com",
     replyTo: "cbrequest@albertacommercialgroup.com",
     subject: `Callback request from ${name} - ${phone} -- ${subject}`,
     text: `${msg || " "}`,
