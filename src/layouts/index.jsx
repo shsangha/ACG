@@ -38,11 +38,13 @@ const Layout = props => {
             }
 
             enterTimeline = new TimelineLite()
+              .set(node, { overflowY: "hidden" })
               .set(".transition_slide", { x: "100vw", display: "block" })
               .to(".transition_slide", 0.5, { x: 0 })
               .to(".transition_slide", 0.5, { x: "-100vw" })
               .to(node, 1, { opacity: 1, ease: Power2.easeIn }, "-=0.35")
               .set(".transition_slide", { display: "none" })
+              .set(node, { overflowY: "auto" })
           }}
           onExiting={node => {
             if (exitTimeline) {
@@ -50,10 +52,12 @@ const Layout = props => {
               exitTimeline.clear()
             }
 
-            exitTimeline = new TimelineLite().to(node, 0.6, {
-              opacity: 0,
-              ease: Power2.easeOut,
-            })
+            exitTimeline = new TimelineLite()
+              .set(node, { overflowY: "hidden" })
+              .to(node, 0.6, {
+                opacity: 0,
+                ease: Power2.easeOut,
+              })
           }}
         >
           <div id="container" className="container">
