@@ -6,7 +6,7 @@ Agent: Gurjant Gill
 PropertyType: retail
 ListingType: sale
 Map: >-
-  EiMxMDQgQXZlIE5FLCBDYWxnYXJ5LCBBQiBUM0osIENhbmFkYSIuKiwKFAoSCbkf1iqkZnFTEQOhBARzT6U_EhQKEgn9PKev6mRxUxHobPZDZwI1bg
+  Eh8xMDQgQXZlIE5FLCBDYWxnYXJ5LCBBQiwgQ2FuYWRhIi4qLAoUChIJNVOu4uNjcVMRzLNPzD62g9QSFAoSCdU_hJ8DcHFTETq2UraxO20m
 Images:
   - /img/csl-render.png
 Header: Cityscape Landing In Jacksonport
