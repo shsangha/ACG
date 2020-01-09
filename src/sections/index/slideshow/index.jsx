@@ -15,9 +15,9 @@ import Slide from "./slide"
 const Slider = ({ allMarkdownRemark }) => {
   const [order, setOrder] = useState(
     (() => {
-      const filteredProps = allMarkdownRemark.nodes
-        .filter(node => node.frontmatter.Images !== null)
-        .filter((_, index) => index < 2)
+      const filteredProps = allMarkdownRemark.nodes.filter(
+        node => node.frontmatter.Images !== null
+      )
 
       if (filteredProps.length < 5) {
         const appendedProps = filteredProps
