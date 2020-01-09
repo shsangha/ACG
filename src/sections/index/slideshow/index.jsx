@@ -15,14 +15,14 @@ import Slide from "./slide"
 const Slider = ({ allMarkdownRemark }) => {
   const [order, setOrder] = useState(
     (() => {
-      const filteredProps = allMarkdownRemark.nodes.filter(
-        node => node.frontmatter.Images !== null
-      )
+      const filteredProps = allMarkdownRemark.nodes
+        .filter(node => node.frontmatter.Images !== null)
+        .filter((_, index) => index < 2)
 
       if (filteredProps.length < 5) {
         const appendedProps = filteredProps
 
-        for (let i = 0; i <= 5 - filteredProps.length; i++) {
+        for (let i = 0; i <= 5 - filteredProps.length + 1; i++) {
           appendedProps.push(
             {
               ...filteredProps[i],
