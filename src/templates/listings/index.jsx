@@ -174,7 +174,7 @@ const Listing = ({ data }) => {
                 {frontmatter.Brochure && frontmatter.Brochure.relativePath && (
                   <a
                     download
-                    href={`${frontmatter.Brochure.absolutePath}`}
+                    href={`../${frontmatter.Brochure.relativePath}`}
                     className="listing_hero_download_link black"
                   >
                     Download PDF
@@ -318,7 +318,7 @@ export const query = graphql`
             Size
             Header
             Brochure {
-              absolutePath
+              relativePath
             }
             Images {
               childImageSharp {
