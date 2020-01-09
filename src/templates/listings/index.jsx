@@ -174,7 +174,7 @@ const Listing = ({ data }) => {
                 {frontmatter.Brochure && frontmatter.Brochure.relativePath && (
                   <a
                     download
-                    href={frontmatter.Brochure.relativePath}
+                    href={`img/${frontmatter.Brochure.relativePath}`}
                     className="listing_hero_download_link black"
                   >
                     Download PDF
