@@ -11,8 +11,8 @@ Description: >-
   sector. His recent
 
 
-  awards include 2016-2018 Centurion Producer award for Century 21 Canada, just
-  to name a
+  awards include 2016 - 2018 Centurion Producer award for Century 21 Canada,
+  just to name a
 
 
   few. He thrives on finding the perfect commercial land for builders and
