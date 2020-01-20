@@ -6,6 +6,7 @@ Agent: Gurjant Gill
 PropertyType: retail
 ListingType: sale
 Map: ChIJtXY5xM5hcVMRYhFkNjfoMzg
+Size: ''
 Images:
   - /img/jpc-1.jpg
   - /img/jpc-2.jpg
