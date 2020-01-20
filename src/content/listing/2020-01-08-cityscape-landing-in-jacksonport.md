@@ -8,6 +8,7 @@ ListingType: sale
 Brochure: /img/cityscape-landing-brocure.pdf
 Map: >-
   Eh8xMDQgQXZlIE5FLCBDYWxnYXJ5LCBBQiwgQ2FuYWRhIi4qLAoUChIJNVOu4uNjcVMRzLNPzD62g9QSFAoSCdU_hJ8DcHFTETq2UraxO20m
+Price: ''
 Images:
   - /img/csl1.jpg
   - /img/csl2.jpg
