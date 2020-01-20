@@ -276,6 +276,7 @@ export default props => (
               PropertyType
               ListingType
               Loacation
+              Price
               Description
               Images {
                 childImageSharp {
