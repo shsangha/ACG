@@ -10,6 +10,7 @@ Loacation: '15134 - 127 Street, Edmonton, Alberta, Canada'
 Map: >-
   https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2366.8190761843284!2d-113.54407978394202!3d53.61452998003621!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x53a0245de85594a9%3A0xeafa5a0e146a3cce!2s15134%20127%20St%20NW%2C%20Edmonton%2C%20AB%20T6V%201C1!5e0!3m2!1sen!2sca!4v1577564140181!5m2!1sen!2sca
 Size: '10,500 SF'
+Price: ''
 Images:
   - /img/1f3932a8-6803-4198-8d49-30e3768ad1d7-w.jpg
   - /img/5e380640-8e0a-41ad-afb8-8561a63eb859-w.jpg
