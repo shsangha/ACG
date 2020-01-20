@@ -129,7 +129,6 @@ collections:
         required: false
         fields:
           - { label: Description, name: Description, widget: string }
-      - label: Specs
         name: Specs
         widget: "list"
         required: false

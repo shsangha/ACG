@@ -232,7 +232,6 @@ export default props => (
               Loacation
               Map
               Size
-              Price
               Header
               Description
               Highlights {

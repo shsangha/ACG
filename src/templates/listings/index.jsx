@@ -312,7 +312,7 @@ export const query = graphql`
             Description
             PropertyType
             ListingType
-            Price
+
             Loacation
             Map
             Size
