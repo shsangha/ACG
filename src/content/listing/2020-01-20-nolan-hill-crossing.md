@@ -13,7 +13,7 @@ Images:
   - /img/nhc1.png
   - /img/nhc3.png
 Header: Nolan Hill Crossing
-Description: ' d'
+Description: dddd
 Highlights:
   - Description: '1.57 acre site with 21,200 sf of retail/professional space'
   - Description: Located in the heart of the growing Nolan Hill community
