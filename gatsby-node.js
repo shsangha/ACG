@@ -10,6 +10,38 @@ exports.onCreateNode = ({ node }) => {
   fmImagesToRelative(node)
 }
 
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions
+  const typeDefs = `
+    type MarkdownRemark implements Node {
+      frontmatter: Frontmatter
+    }
+    type Frontmatter {
+      Highlights: [Highlight]
+      Specs: [Spec]
+      Areas: [Area]
+    }
+
+    type Highlight {
+      Description: String
+    }
+
+    type Spec {
+      Key: String
+      Value: String
+    }
+
+    type Area {
+      Area: String
+      Size: String
+    }
+
+
+
+  `
+  createTypes(typeDefs)
+}
+
 exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
   actions.setWebpackConfig({
     module: {
