@@ -20,6 +20,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       Highlights: [Highlight]
       Specs: [Spec]
       Areas: [Area]
+      Description: String
     }
 
     type Highlight {

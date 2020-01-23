@@ -54,7 +54,8 @@ collections:
           label: "Description",
           name: "Description",
           widget: "markdown",
-          required: true,
+          required: false,
+          default: "",
         }
 
   - name: "listing"

@@ -187,12 +187,16 @@ const Listing = ({ data }) => {
           <div className="listing_page_details">
             <div className="listing_page_details_lhs">
               <div className="listing_page_details_desc">
-                <h3 className="listing_page_details_desc_header">
-                  {frontmatter.Header}
-                </h3>
-                <p className="listing_page_details_desc_text">
-                  {frontmatter.Description}
-                </p>
+                {frontmatter.Description && (
+                  <>
+                    <h3 className="listing_page_details_desc_header">
+                      {frontmatter.Header}
+                    </h3>
+                    <p className="listing_page_details_desc_text">
+                      {frontmatter.Description}
+                    </p>
+                  </>
+                )}
               </div>
               {frontmatter.Highlights && (
                 <div className="listing_page_details_features_wrapper">
