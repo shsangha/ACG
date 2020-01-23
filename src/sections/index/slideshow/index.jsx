@@ -35,10 +35,16 @@ const Slider = ({ allMarkdownRemark }) => {
             }
           )
         }
-        return appendedProps
+        return {
+          list: appendedProps,
+          sortOrder: [0, 1, 2, 3, 4],
+        }
       }
 
-      return filteredProps
+      return {
+        list: filteredProps,
+        sortOrder: [0, 1, 2, 3, 4],
+      }
     })()
   )
 
@@ -75,7 +81,7 @@ const Slider = ({ allMarkdownRemark }) => {
         offset: 30,
         duration: "100%",
       })
-        .setClassToggle(`.paralax_content`, `scrolling`)
+        .setClassToggle(`.slider`, `scrolling`)
         .setTween(tl)
         .addTo(controller)
     }
@@ -83,21 +89,28 @@ const Slider = ({ allMarkdownRemark }) => {
 
   const nextSlide = throttle(() => {
     setOrder(prevState => {
-      const copy = [...prevState]
+      const copy = { ...prevState }
 
-      const firstElement = copy.shift()
-
-      return [...copy, firstElement]
+      const firstElement = copy.list.shift()
+      const sortElement = copy.sortOrder.shift()
+      return {
+        list: [...copy.list, firstElement],
+        sortOrder: [...copy.sortOrder, sortElement],
+      }
     })
   }, 500)
 
   const prevSlide = throttle(() => {
     setOrder(prevState => {
-      const copy = [...prevState]
+      const copy = { ...prevState }
 
-      const firstElement = copy.pop()
+      const firstElement = copy.list.pop()
+      const sortElement = copy.sortOrder.pop()
 
-      return [firstElement, ...copy]
+      return {
+        list: [firstElement, ...copy.list],
+        sortOrder: [sortElement, ...copy.sortOrder],
+      }
     })
   }, 500)
 
@@ -110,11 +123,13 @@ const Slider = ({ allMarkdownRemark }) => {
               nextSlide={nextSlide}
               prevSlide={prevSlide}
               index={idx}
-              key={order[idx].id}
+              key={order.sortOrder[idx]}
             >
               <div
                 to={`listings/${
-                  order[idx].wrapping ? order[idx].wrapping : order[idx].id
+                  order.list[idx].wrapping
+                    ? order.list[idx].wrapping
+                    : order.list[idx].id
                 }`}
                 className="slide"
               >
@@ -128,8 +143,8 @@ const Slider = ({ allMarkdownRemark }) => {
                             position: "relative",
                           }}
                           fluid={
-                            order[idx].frontmatter.Images[0].childImageSharp
-                              .fluid
+                            order.list[idx].frontmatter.Images[0]
+                              .childImageSharp.fluid
                           }
                           className={`img_content ${
                             idx === 2 ? "selected" : ""
@@ -140,9 +155,9 @@ const Slider = ({ allMarkdownRemark }) => {
                       return idx === 2 ? (
                         <Link
                           to={`/listings/${
-                            order[idx].wrapping
-                              ? order[idx].wrapping
-                              : order[idx].id
+                            order.list[idx].wrapping
+                              ? order.list[idx].wrapping
+                              : order.list[idx].id
                           }`}
                         >
                           <SliderImg />
@@ -196,10 +211,10 @@ const Slider = ({ allMarkdownRemark }) => {
           className="more slider_link hightlight_hover"
           key={order[2]}
           to={`/listings/${
-            order[2].wrapping ? order[2].wrapping : order[2].id
+            order.list[2].wrapping ? order.list[2].wrapping : order.list[2].id
           }`}
         >
-          {order[2].frontmatter.title}
+          {order.list[2].frontmatter.title}
         </Link>
 
         <Link className="slider_link hightlight_hover" to="/listings">
