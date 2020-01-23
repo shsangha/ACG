@@ -13,6 +13,15 @@ Images:
   - /img/nhc1.png
   - /img/nhc3.png
 Header: Nolan Hill Crossing
-Description: "• 1.57 acre site with 21,200 sf of retail/professional space\r\n\n• Located in the heart of the growing Nolan Hill community\r\n\n• Opening in Q3 2020\r\n\n• Development permit approved\r\n\n• Approved Daycare\n\n• 2 new schools in the community:\r\n\n\\> One Elementary/Junior High School through CCSD\r\n\n\\> One K-4 through CBE"
+Description: ''
+Highlights:
+  - Description: '1.57 acre site with 21,200 sf of retail/professional space'
+  - Description: Located in the heart of the growing Nolan Hill community
+  - Description: Development permit approved
+  - Description: Approved Daycare
+  - Description: 2 new schools in the community
+  - Description: One Elementary/Junior High School through CCSD
+  - Description: One K-4 through CBE
+Specs: []
 ---
 
