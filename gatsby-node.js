@@ -36,8 +36,6 @@ exports.createSchemaCustomization = ({ actions }) => {
       Size: String
     }
 
-
-
   `
   createTypes(typeDefs)
 }
