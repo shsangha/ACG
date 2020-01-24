@@ -87,20 +87,20 @@ collections:
         widget: "select"
         options:
           [
-            "commercial",
-            "retail",
-            "office",
-            "industrial",
-            "hotel",
-            "land",
-            "business",
+            "Commercial",
+            "Retail",
+            "Office",
+            "Industrial",
+            "Hotel",
+            "Land",
+            "Business",
           ]
         required: true
 
       - label: "Listing Type"
         name: "ListingType"
         widget: "select"
-        options: ["sale", "lease"]
+        options: ["Sale", "Lease"]
         required: true
       - { label: "Brochure", name: "Brochure", widget: "file", required: false }
       - {
