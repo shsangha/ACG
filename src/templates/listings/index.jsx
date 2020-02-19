@@ -7,7 +7,12 @@ import Img from "gatsby-image/withIEPolyfill"
 import "@brainhubeu/react-carousel/lib/style.css"
 import Seo from "../../components/seo"
 
-const Listing = ({ data }) => {
+const Listing = ({
+  data,
+  pageResources: {
+    page: { path },
+  },
+}) => {
   const { frontmatter } = data.listings.edges[0].node
 
   const [carouselValue, setCarouselValue] = useState(0)
@@ -39,7 +44,7 @@ const Listing = ({ data }) => {
         title={frontmatter.title}
         desc={frontmatter.Header}
         banner={frontmatter.Images && frontmatter.Images[0] ? ar : null}
-        pathname={location.pathname}
+        pathname={path}
       />
       <div className="listing_page">
         <Link
