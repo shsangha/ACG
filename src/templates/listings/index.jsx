@@ -30,16 +30,15 @@ const Listing = ({ data }) => {
     })
   }
 
+  const lastIndex = frontmatter.Images[0].childImageSharp.fluid.src.split("/")
+  const ar = `/img/${lastIndex[lastIndex.length - 1]}`
+
   return (
     <>
       <Seo
         title={frontmatter.title}
-        desc={frontmatter.Description}
-        banner={
-          frontmatter.Images && frontmatter.Images[0]
-            ? frontmatter.Images[0].childImageSharp.fluid.src
-            : null
-        }
+        desc={frontmatter.Header}
+        banner={frontmatter.Images && frontmatter.Images[0] ? ar : null}
       />
       <div className="listing_page">
         <Link
