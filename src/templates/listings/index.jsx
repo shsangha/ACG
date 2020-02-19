@@ -39,6 +39,7 @@ const Listing = ({ data }) => {
         title={frontmatter.title}
         desc={frontmatter.Header}
         banner={frontmatter.Images && frontmatter.Images[0] ? ar : null}
+        pathname={location.pathname}
       />
       <div className="listing_page">
         <Link
