@@ -5,7 +5,7 @@ title: Sunstar Crossing In Cornerstone
 Agent: Gurjant Gill
 PropertyType: Retail
 ListingType: Sale
-Brochure: /img/cornerstone-brochure-acg-r1.pdf
+Brochure: /img/cstong.jpg
 Loacation: Cornerstone
 Map: ChIJm-iQ3pxhcVMRcSeeL_WJWUw
 Size: 1100+
