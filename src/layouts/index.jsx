@@ -1,4 +1,4 @@
-import React, { useEffect, createContext } from "react"
+import React, { useEffect } from "react"
 import "./style.scss"
 import { TransitionGroup, Transition } from "react-transition-group"
 import { TimelineLite, Power2 } from "gsap"
@@ -7,8 +7,6 @@ import Header from "../components/header"
 import Footer from "../components/footer"
 
 let exitTimeline, enterTimeline
-
-// add the cursor context
 
 const Layout = props => {
   useEffect(() => {

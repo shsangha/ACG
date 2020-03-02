@@ -1,16 +1,15 @@
 import React, { useRef, useState, useEffect } from "react"
-import TimelineLite from "TimelineLite"
-import { Power1 } from "gsap"
+import { Power1, TimelineLite } from "gsap"
 import { Transition } from "react-transition-group"
-import { useFormik } from "formik"
+import { Formik, Field } from "formik"
 
 let loaderTimeline
 
-const Form = props => {
+const ContactForm = props => {
   const firstRef = useRef(null)
   const lastRef = useRef(null)
   const [method, setMethod] = useState("mail")
-  const [touched, setTouched] = useState({})
+  const [visited, setVisited] = useState({})
   const [submitError, setSubmitError] = useState("")
 
   const defaultStyle = {
@@ -63,25 +62,35 @@ const Form = props => {
     }
   }, [props.tabTrab])
 
-  const validate = values => {
-    const errors = {}
+  const validatePhone = value => {
+    let err
 
     const phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
-    if (!values.phone.match(phoneno) && method === "phone") {
-      errors.phone = "Enter a 10 digit phone number"
+    if (!value.match(phoneno) && method === "phone") {
+      err = "Enter a 10 digit phone number"
     }
+    return err
+  }
+
+  const validateEmail = value => {
+    let err
 
     const email = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
-    if (!values.mail.match(email) && method === "mail") {
-      errors.mail = "Enter a valid email address"
+    if (!value.match(email) && method === "mail") {
+      err = "Enter a valid email address"
     }
 
-    if (values.name.length < 3) {
-      errors.name = "Enter atleast 3 characters"
-    }
+    return err
+  }
 
-    return errors
+  const validateName = value => {
+    let err
+
+    if (value.length < 3) {
+      err = "Enter atleast 3 characters"
+    }
+    return err
   }
 
   const submitFn = values => {
@@ -115,289 +124,289 @@ const Form = props => {
       })
   }
 
-  const formik = useFormik({
-    initialValues: {
-      name: "",
-      mail: "",
-      phone: "",
-      msg: "",
-    },
-    validate,
-    onSubmit: submitFn,
-  })
-
   return (
-    <Transition
-      in={!!!props.confirmed}
-      onExited={() => {
-        formik.resetForm()
-      }}
-      timeout={{
-        enter: 0,
-        exit: 1000,
-      }}
+    <Formik
+      initialValues={{ name: "", mail: "", phone: "", msg: "" }}
+      onSubmit={submitFn}
     >
-      <>
-        <div className="contact_form_toggles">
-          <button
-            ref={firstRef}
-            onClick={() => setMethod("mail")}
-            className={`contact_form_button hightlight_hover ${
-              method === "mail" ? "selected" : ""
-            }`}
-          >
-            Send Mail
-          </button>
-          <button
-            onClick={() => setMethod("phone")}
-            className={`contact_form_button hightlight_hover ${
-              method === "mail" ? "" : "selected"
-            }`}
-          >
-            Request Callback
-          </button>
-        </div>
-        <form
-          autoComplete="new-password"
-          onSubmit={formik.handleSubmit}
-          className="contact_form"
+      {({ resetForm, handleSubmit, errors }) => (
+        <Transition
+          in={!!!props.confirmed}
+          onExited={() => {
+            resetForm()
+          }}
+          timeout={{
+            enter: 0,
+            exit: 1000,
+          }}
         >
-          <div className="contact_field">
-            <div
-              className={`contact_field_content ${
-                touched.name ? "selected" : ""
-              }`}
-            >
-              <label className="contact_label" htmlFor="#name">
-                Name:
-              </label>
-              <input
-                onFocus={() => {
-                  setTouched(prev => ({ ...prev, name: true }))
-                }}
-                autoComplete="new-password"
-                name="name"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.name}
-                className="contact_input"
-                id="name"
-                type="text"
-              />
+          <>
+            <div className="contact_form_toggles">
+              <button
+                type="button"
+                ref={firstRef}
+                onClick={() => setMethod("mail")}
+                className={`contact_form_button hightlight_hover ${
+                  method === "mail" ? "selected" : ""
+                }`}
+              >
+                Send Mail
+              </button>
+              <button
+                type="button"
+                onClick={() => setMethod("phone")}
+                className={`contact_form_button hightlight_hover ${
+                  method === "mail" ? "" : "selected"
+                }`}
+              >
+                Request Callback
+              </button>
             </div>
-
-            <Transition
-              timeout={800}
-              in={!!(formik.errors.name && formik.touched.name)}
+            <form
+              autoComplete="new-password"
+              onSubmit={handleSubmit}
+              className="contact_form"
             >
-              {state => (
+              <div className="contact_field">
                 <div
-                  style={{ ...defaultStyle, ...transitionStyles[state] }}
-                  className="contact_error_wrapper"
+                  className={`contact_field_content ${
+                    visited.name ? "selected" : ""
+                  }`}
                 >
-                  {formik.errors.name && (
-                    <p
-                      className="contact_error"
-                      aria-atomic="true"
-                      role="alert"
-                    >
-                      {formik.errors.name}
-                    </p>
-                  )}
-                </div>
-              )}
-            </Transition>
-          </div>
-          <div
-            className={`contact_dynamic_wrapper ${
-              method === "mail" ? "mail" : "phone"
-            }`}
-          >
-            <div className="contact_field">
-              <div
-                className={`contact_field_content ${
-                  touched.mail || touched.phone ? "selected" : ""
-                }`}
-              >
-                <label className="contact_label" htmlFor="#mail">
-                  Mail:
-                </label>
-                <input
-                  onFocus={() => {
-                    setTouched(prev => ({ ...prev, mail: true }))
-                  }}
-                  autoComplete="new-password"
-                  name="mail"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  disabled={method !== "mail"}
-                  value={formik.values.mail}
-                  className="contact_input"
-                  id="mail"
-                  type="email"
-                />
-              </div>
-
-              <Transition
-                timeout={800}
-                in={!!(formik.errors.mail && formik.touched.mail)}
-              >
-                {state => (
-                  <div
-                    style={{ ...defaultStyle, ...transitionStyles[state] }}
-                    className="contact_error_wrapper"
-                  >
-                    {formik.errors.mail && (
-                      <p
-                        className="contact_error"
-                        aria-atomic="true"
-                        role="alert"
-                      >
-                        {formik.errors.mail}
-                      </p>
+                  <label className="contact_label" htmlFor="name">
+                    Name:
+                  </label>
+                  <Field validate={validateName} name="name">
+                    {({ field }) => (
+                      <input
+                        id="name"
+                        className="contact_input"
+                        onFocus={() => {
+                          setVisited(prev => ({ ...prev, name: true }))
+                        }}
+                        autoComplete="new-password"
+                        {...field}
+                      />
                     )}
-                  </div>
-                )}
-              </Transition>
-            </div>
-            <div className="contact_field">
+                  </Field>
+                </div>
+
+                <Transition timeout={800} in={!!(errors.name && visited.name)}>
+                  {state => (
+                    <div
+                      style={{ ...defaultStyle, ...transitionStyles[state] }}
+                      className="contact_error_wrapper"
+                    >
+                      {errors.name && visited.name && (
+                        <p
+                          className="contact_error"
+                          aria-atomic="true"
+                          role="alert"
+                        >
+                          {errors.name}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                </Transition>
+              </div>
               <div
-                className={`contact_field_content ${
-                  touched.phone || touched.mail ? "selected" : ""
+                className={`contact_dynamic_wrapper ${
+                  method === "mail" ? "mail" : "phone"
                 }`}
               >
-                <label className="contact_label" htmlFor="#phone">
-                  Phone:
-                </label>
-                <input
-                  onFocus={() => {
-                    setTouched(prev => ({ ...prev, phone: true }))
-                  }}
-                  autoComplete="new-password"
-                  name="phone"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  value={formik.values.phone}
-                  className="contact_input"
-                  disabled={method !== "phone"}
-                  id="phone"
-                  type="tel"
-                />
+                <div className="contact_field">
+                  <div
+                    className={`contact_field_content ${
+                      visited.mail || visited.phone ? "selected" : ""
+                    }`}
+                  >
+                    <label className="contact_label" htmlFor="mail">
+                      Mail:
+                    </label>
+                    <Field validate={validateEmail} name="mail">
+                      {({ field }) => (
+                        <input
+                          id="mail"
+                          className="contact_input"
+                          onFocus={() => {
+                            setVisited(prev => ({ ...prev, mail: true }))
+                          }}
+                          autoComplete="new-password"
+                          type="email"
+                          disabled={method !== "mail"}
+                          {...field}
+                        />
+                      )}
+                    </Field>
+                  </div>
+
+                  <Transition
+                    timeout={800}
+                    in={!!(errors.mail && visited.mail)}
+                  >
+                    {state => (
+                      <div
+                        style={{ ...defaultStyle, ...transitionStyles[state] }}
+                        className="contact_error_wrapper"
+                      >
+                        {errors.mail && visited.mail && (
+                          <p
+                            className="contact_error"
+                            aria-atomic="true"
+                            role="alert"
+                          >
+                            {errors.mail}
+                          </p>
+                        )}
+                      </div>
+                    )}
+                  </Transition>
+                </div>
+                <div className="contact_field">
+                  <div
+                    className={`contact_field_content ${
+                      visited.phone || visited.mail ? "selected" : ""
+                    }`}
+                  >
+                    <label className="contact_label" htmlFor="phone">
+                      Phone:
+                    </label>
+                    <Field validate={validatePhone} name="phone">
+                      {({ field }) => (
+                        <input
+                          id="phone"
+                          className="contact_input"
+                          onFocus={() => {
+                            setVisited(prev => ({ ...prev, phone: true }))
+                          }}
+                          autoComplete="new-password"
+                          disabled={method !== "phone"}
+                          {...field}
+                        />
+                      )}
+                    </Field>
+                  </div>
+
+                  <Transition
+                    timeout={800}
+                    in={!!(errors.phone && visited.phone)}
+                  >
+                    {state => (
+                      <div
+                        style={{ ...defaultStyle, ...transitionStyles[state] }}
+                        className="contact_error_wrapper"
+                      >
+                        {errors.phone && visited.phone && (
+                          <p
+                            className="contact_error"
+                            aria-atomic="true"
+                            role="alert"
+                          >
+                            {errors.phone}
+                          </p>
+                        )}{" "}
+                      </div>
+                    )}
+                  </Transition>
+                </div>
+              </div>
+              <div className="contact_field">
+                <div
+                  className={`contact_field_content ${
+                    visited.msg ? "selected" : ""
+                  }`}
+                >
+                  <label className="contact_label" htmlFor="msg">
+                    Message:
+                  </label>
+                  <Field name="msg">
+                    {({ field }) => (
+                      <textarea
+                        id="msg"
+                        className="contact_input"
+                        onFocus={() => {
+                          setVisited(prev => ({ ...prev, msg: true }))
+                        }}
+                        rows={3}
+                        columns={60}
+                        {...field}
+                      />
+                    )}
+                  </Field>
+                </div>
               </div>
 
-              <Transition
-                timeout={800}
-                in={!!(formik.errors.phone && formik.touched.phone)}
+              <button
+                type="submit"
+                ref={lastRef}
+                className="contact_submit_wrapper"
               >
+                <p type="submit" className="contact_submit_text">
+                  Send
+                </p>
+                <svg
+                  className="contact_submit_loader"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 127.16 16.64"
+                >
+                  <circle
+                    className="loader_circ"
+                    cx="8.32"
+                    cy="8.32"
+                    r="7.5"
+                    fill="#231f20"
+                    stroke="#231f20"
+                    strokeMiterlimit="10"
+                    strokeWidth="1.64"
+                  />
+                  <circle
+                    className="loader_circ"
+                    cx="63.58"
+                    cy="8.32"
+                    r="7.5"
+                    fill="#231f20"
+                    stroke="#231f20"
+                    strokeMiterlimit="10"
+                    strokeWidth="1.64"
+                  />
+                  <circle
+                    className="loader_circ"
+                    cx="118.84"
+                    cy="8.32"
+                    r="7.5"
+                    fill="#231f20"
+                    stroke="#231f20"
+                    strokeMiterlimit="10"
+                    strokeWidth="1.64"
+                  />
+                </svg>
+              </button>
+
+              <Transition timeout={800} in={!!submitError}>
                 {state => (
                   <div
                     style={{ ...defaultStyle, ...transitionStyles[state] }}
                     className="contact_error_wrapper"
                   >
-                    {formik.errors.phone && (
+                    {submitError && (
                       <p
-                        className="contact_error"
+                        className="contact_error form_error"
                         aria-atomic="true"
                         role="alert"
                       >
-                        {formik.errors.phone}
+                        {submitError}
                       </p>
                     )}{" "}
                   </div>
                 )}
               </Transition>
-            </div>
-          </div>
-          <div className="contact_field">
-            <div
-              className={`contact_field_content ${
-                touched.msg ? "selected" : ""
-              }`}
-            >
-              <label className="contact_label" htmlFor="#msg">
-                Message:
-              </label>
-              <textarea
-                onFocus={() => {
-                  setTouched(prev => ({ ...prev, msg: true }))
-                }}
-                autoComplete="new-password"
-                name="msg"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.msg}
-                className="contact_input"
-                id="msg"
-                rows={3}
-                colums={60}
-              />
-            </div>
-          </div>
-
-          <button ref={lastRef} className="contact_submit_wrapper">
-            <p type="submit" className="contact_submit_text">
-              Send
-            </p>
-            <svg
-              className="contact_submit_loader"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 127.16 16.64"
-            >
-              <circle
-                className="loader_circ"
-                cx="8.32"
-                cy="8.32"
-                r="7.5"
-                fill="#231f20"
-                stroke="#231f20"
-                strokeMiterlimit="10"
-                strokeWidth="1.64"
-              />
-              <circle
-                className="loader_circ"
-                cx="63.58"
-                cy="8.32"
-                r="7.5"
-                fill="#231f20"
-                stroke="#231f20"
-                strokeMiterlimit="10"
-                strokeWidth="1.64"
-              />
-              <circle
-                className="loader_circ"
-                cx="118.84"
-                cy="8.32"
-                r="7.5"
-                fill="#231f20"
-                stroke="#231f20"
-                strokeMiterlimit="10"
-                strokeWidth="1.64"
-              />
-            </svg>
-          </button>
-
-          <Transition timeout={800} in={!!submitError}>
-            {state => (
-              <div
-                style={{ ...defaultStyle, ...transitionStyles[state] }}
-                className="contact_error_wrapper"
-              >
-                {submitError && (
-                  <p
-                    className="contact_error form_error"
-                    aria-atomic="true"
-                    role="alert"
-                  >
-                    {submitError}
-                  </p>
-                )}{" "}
-              </div>
-            )}
-          </Transition>
-        </form>
-      </>
-    </Transition>
+            </form>
+          </>
+        </Transition>
+      )}
+    </Formik>
   )
 }
 
-export default Form
+export default ContactForm

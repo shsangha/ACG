@@ -5,7 +5,12 @@ import "./style.scss"
 const Header = () => {
   return (
     <header className="header">
-      <Link className="header_home_link " to="/" state={{ internalNav: true }}>
+      <Link
+        aria-label="go home"
+        className="header_home_link "
+        to="/"
+        state={{ internalNav: true }}
+      >
         <svg
           className="header_logo"
           xmlns="http://www.w3.org/2000/svg"

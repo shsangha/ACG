@@ -1,8 +1,13 @@
 import React, { useState } from "react"
-import ConfirmCard from "./confirm"
 import Form from "./form"
 import "./style.scss"
 import PropTypes from "prop-types"
+import loadable from "react-loadable"
+
+const ConfirmCard = loadable({
+  loader: () => import("./confirm"),
+  loading: () => null,
+})
 
 const ContactForm = props => {
   const [confirmed, setConfirmed] = useState(false)

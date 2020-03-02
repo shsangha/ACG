@@ -7,12 +7,11 @@ import "./style.scss"
 import { TimelineMax, Power2 } from "gsap"
 import ScrollMagic from "scrollmagic"
 import "animation.gsap"
-import "debug.addIndicators"
 import { throttle } from "lodash"
 
 import Slide from "./slide"
 
-const Slider = ({ allMarkdownRemark }) => {
+export const Slider = ({ allMarkdownRemark }) => {
   const [order, setOrder] = useState(
     (() => {
       const filteredProps = allMarkdownRemark.nodes.filter(
@@ -40,7 +39,6 @@ const Slider = ({ allMarkdownRemark }) => {
           sortOrder: [0, 1, 2, 3, 4],
         }
       }
-
       return {
         list: filteredProps,
         sortOrder: [0, 1, 2, 3, 4],
@@ -136,21 +134,25 @@ const Slider = ({ allMarkdownRemark }) => {
                 <div className="paralax_content">
                   <div className="img">
                     {(() => {
-                      const SliderImg = () => (
-                        <Img
-                          style={{
-                            width: "100%",
-                            position: "relative",
-                          }}
-                          fluid={
-                            order.list[idx].frontmatter.Images[0]
-                              .childImageSharp.fluid
-                          }
-                          className={`img_content ${
-                            idx === 2 ? "selected" : ""
-                          }`}
-                        />
-                      )
+                      const SliderImg = () => {
+                        return (
+                          <Img
+                            style={{
+                              width: "100%",
+                              position: "relative",
+                            }}
+                            data-testid={`${idx}`}
+                            alt={order.list[idx].frontmatter.title}
+                            fluid={
+                              order.list[idx].frontmatter.Images[0]
+                                .childImageSharp.fluid
+                            }
+                            className={`img_content ${
+                              idx === 2 ? "selected" : ""
+                            }`}
+                          />
+                        )
+                      }
 
                       return idx === 2 ? (
                         <Link

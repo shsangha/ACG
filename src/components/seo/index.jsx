@@ -49,7 +49,6 @@ const SEO = ({ title, desc, banner, pathname, bCrumb }) => {
     url: `${siteUrl}${pathname || ""}`,
   }
 
-
   const schemaOrgWebPage = {
     "@context": "http://schema.org",
     "@type": "WebPage",
@@ -84,25 +83,24 @@ const SEO = ({ title, desc, banner, pathname, bCrumb }) => {
     },
   }
 
-
   const itemListElement = [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: 'about',
-        item: 'https://albertacommercialgroup.com/about'
-      },
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: 'listings',
-        item: 'https://albertacommercialgroup.com/listings'
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "about",
+      item: "https://albertacommercialgroup.com/about",
     },
     {
       "@type": "ListItem",
       position: 1,
-      name: 'contact',
-      item: 'https://albertacommercialgroup.com/contact'
+      name: "listings",
+      item: "https://albertacommercialgroup.com/listings",
+    },
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "contact",
+      item: "https://albertacommercialgroup.com/contact",
     },
   ]
 
@@ -111,7 +109,7 @@ const SEO = ({ title, desc, banner, pathname, bCrumb }) => {
     "@type": "BreadcrumbList",
     description: "Breadcrumbs list",
     name: "Breadcrumbs",
-    itemListElement: bCrumb ? [...itemListElement, bCrumb] : itemListElement
+    itemListElement: bCrumb ? [...itemListElement, bCrumb] : itemListElement,
   }
 
   return (
@@ -138,7 +136,7 @@ const SEO = ({ title, desc, banner, pathname, bCrumb }) => {
         name={facebook}
       />
       <Twitter
-        url={seo.url} 
+        url={seo.url}
         title={seo.title}
         image={seo.image}
         desc={seo.description}
@@ -159,8 +157,8 @@ SEO.propTypes = {
     "@type": PropTypes.string,
     position: PropTypes.number,
     item: PropTypes.string,
-    name: PropTypes.string
-  })
+    name: PropTypes.string,
+  }),
 }
 
 SEO.defaultProps = {
