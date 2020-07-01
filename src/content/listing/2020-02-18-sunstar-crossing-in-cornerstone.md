@@ -11,7 +11,9 @@ Map: ChIJm-iQ3pxhcVMRcSeeL_WJWUw
 Size: 1100+
 Price: $590/SF
 Images:
-  - /img/cnrstn.png
+  - /img/r2a.png
+  - /img/r1a.png
+  - /img/r3a.png
 Header: Sunstar Crossing In Cornerstone
 Description: >-
   Welcome to the Cornerstone Community, with 5 modern neighbourhoods, over 1,000
