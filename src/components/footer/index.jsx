@@ -4,7 +4,7 @@ import "./style.scss"
 const Footer = () => {
   useEffect(() => {
     const observer = new IntersectionObserver(
-      elements => {
+      (elements) => {
         for (let i = 0; i < elements.length; i++) {
           const element = elements[i]
 
@@ -118,15 +118,6 @@ const Footer = () => {
                     className="footer_link hightlight_hover"
                   >
                     403 681 3406
-                  </a>
-                </div>
-                <div className="footer_contact">
-                  <h5 className="footer_label">Jim Lee</h5>
-                  <a
-                    href="tel:14036083406"
-                    className="footer_link hightlight_hover"
-                  >
-                    403 617 0438
                   </a>
                 </div>
               </div>
