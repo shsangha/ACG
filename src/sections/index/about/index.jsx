@@ -16,7 +16,7 @@ const About = ({ location }) => {
       threshold: 0.8,
     }
 
-    const observer = new IntersectionObserver(element => {
+    const observer = new IntersectionObserver((element) => {
       if (element[0].isIntersecting) {
         if (DrawSVG && typeof window !== undefined) {
           const tl = new TimelineMax()
@@ -53,8 +53,8 @@ const About = ({ location }) => {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      elements => {
-        elements.forEach(element => {
+      (elements) => {
+        elements.forEach((element) => {
           if (element.isIntersecting) {
             element.target.classList.add("intersected")
 
@@ -65,7 +65,7 @@ const About = ({ location }) => {
       { threshold: 0.8 }
     )
 
-    document.querySelectorAll(".about_animate_in").forEach(item => {
+    document.querySelectorAll(".about_animate_in").forEach((item) => {
       observer.observe(item)
     })
   }, [])
@@ -87,26 +87,6 @@ const About = ({ location }) => {
 
           paul: allMarkdownRemark(
             filter: { frontmatter: { title: { eq: "Paul Gill" } } }
-          ) {
-            nodes {
-              frontmatter {
-                title
-                Description
-                Image {
-                  childImageSharp {
-                    fluid(maxWidth: 600) {
-                      ...GatsbyImageSharpFluid
-                    }
-                  }
-                }
-                Email
-                Phone
-              }
-            }
-          }
-
-          jim: allMarkdownRemark(
-            filter: { frontmatter: { title: { eq: "Jim Lee" } } }
           ) {
             nodes {
               frontmatter {
@@ -147,12 +127,12 @@ const About = ({ location }) => {
         }
       `}
     >
-      {data => {
+      {(data) => {
         const { title, Description } = data.about.nodes[0].frontmatter
 
-        const { paul, jim, gurjant } = data
+        const { paul, gurjant } = data
 
-        const team = [gurjant.nodes[0], paul.nodes[0], jim.nodes[0]]
+        const team = [gurjant.nodes[0], paul.nodes[0]]
 
         return (
           <div className="about_page">
