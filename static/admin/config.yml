@@ -12,7 +12,7 @@ collections:
     label: "team"
     folder: "src/content/team"
     create: false
-    delete: false
+    delete: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Type", name: "Type", widget: "hidden", default: "team" }
