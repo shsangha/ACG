@@ -37,6 +37,11 @@ Description: >-
   studio, financial services, child care facility, restaurant/bar, post
   secondary institution, etc. Quick access to Metis Trail, Mcknight Blvd,
   Deerfoot Trail (QE2), and Stoney Trail.
+Highlights:
+  - Description: '- 27'' clear drive-in door'
+  - Description: '- Airport view / Downtown views'
+  - Description: '- 2nd floor office with rooftop patio area'
+  - Description: (I-B) Industrial Business Zoning
 Specs: []
 Areas: []
 ---
