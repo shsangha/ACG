@@ -5,7 +5,7 @@ title: Cityscape Landing In Jacksonport
 Agent: Gurjant Gill
 PropertyType: retail
 ListingType: sale
-Brochure: /img/cityscape-landing-2nd-draft-low-res-1-.pdf
+Brochure: /img/updated-building-csl-layout-lease-_-sell-1-2-.pdf
 Map: >-
   Eh8xMDQgQXZlIE5FLCBDYWxnYXJ5LCBBQiwgQ2FuYWRhIi4qLAoUChIJNVOu4uNjcVMRzLNPzD62g9QSFAoSCdU_hJ8DcHFTETq2UraxO20m
 Price: ''
