@@ -144,60 +144,61 @@ collections:
         fields:
           - { label: Area, name: Area, widget: string }
           - { label: Size, name: Size, widget: string }
- - name: "reslisting"
-    label: "residential listing"
-    folder: "src/content/reslisting"
-    create: true
-    delete: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    editor:
-      preview: false
-    fields:
-      - { label: "Type", name: "Type", widget: "hidden", default: "reslisting" }
-      - {
-          label: "Publish Date",
-          name: "date",
-          widget: "datetime",
-          required: false,
-        }
-      - { label: "Title", name: "title", widget: "string", required: true }
 
-      - label: "Agent"
-        name: "Agent"
-        widget: "select"
-        options: ["Gurjant Gill", "Paul Gill",]
-        required: true
+  - name: "reslisting"
+      label: "residential listing"
+      folder: "src/content/reslisting"
+      create: true
+      delete: true
+      slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+      editor:
+        preview: false
+      fields:
+        - { label: "Type", name: "Type", widget: "hidden", default: "reslisting" }
+        - {
+            label: "Publish Date",
+            name: "date",
+            widget: "datetime",
+            required: false,
+          }
+        - { label: "Title", name: "title", widget: "string", required: true }
 
-      - label: "Listing Type"
-        name: "ListingType"
-        widget: "select"
-        options: ["Sale", "Lease", "Sale or Lease"]
-        required: true
-      - { label: "Brochure", name: "Brochure", widget: "file", required: false }
-      - {
-          label: "Location",
-          name: "Loacation",
-          widget: "string",
-          required: false,
-        }
-      - { label: "Maps Src", name: "Map", widget: "string", required: false }
-      - { label: "Size", name: "Size", widget: "string", required: false }
-      - { label: "Price", name: "Price", widget: "string", required: false }
-      - { label: "Matterport", name: "Matterport", widget: "string", required: false }
-      - { label: "Youtube", name: "Youtube", widget: "string", required: false }
+        - label: "Agent"
+          name: "Agent"
+          widget: "select"
+          options: ["Gurjant Gill", "Paul Gill",]
+          required: true
 
-      - label: "Images"
-        name: "Images"
-        widget: "list"
-        required: false
-        field: { label: Image, name: Image, widget: image }
-      - { label: "Header", name: "Header", widget: "string", required: true }
-      - {
-          label: "Description",
-          name: "Description",
-          widget: "markdown",
-          required: false,
-        }
+        - label: "Listing Type"
+          name: "ListingType"
+          widget: "select"
+          options: ["Sale", "Lease", "Sale or Lease"]
+          required: true
+        - { label: "Brochure", name: "Brochure", widget: "file", required: false }
+        - {
+            label: "Location",
+            name: "Loacation",
+            widget: "string",
+            required: false,
+          }
+        - { label: "Maps Src", name: "Map", widget: "string", required: false }
+        - { label: "Size", name: "Size", widget: "string", required: false }
+        - { label: "Price", name: "Price", widget: "string", required: false }
+        - { label: "Matterport", name: "Matterport", widget: "string", required: false }
+        - { label: "Youtube", name: "Youtube", widget: "string", required: false }
+
+        - label: "Images"
+          name: "Images"
+          widget: "list"
+          required: false
+          field: { label: Image, name: Image, widget: image }
+        - { label: "Header", name: "Header", widget: "string", required: true }
+        - {
+            label: "Description",
+            name: "Description",
+            widget: "markdown",
+            required: false,
+          }
 
 
 
