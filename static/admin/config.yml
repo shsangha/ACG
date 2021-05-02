@@ -184,6 +184,8 @@ collections:
       - { label: "Size", name: "Size", widget: "string", required: false }
       - { label: "Price", name: "Price", widget: "string", required: false }
       - { label: "Matterport", name: "Matterport", widget: "string", required: false }
+      - { label: "Youtube", name: "Youtube", widget: "string", required: false }
+
       - label: "Images"
         name: "Images"
         widget: "list"
